@@ -88,7 +88,12 @@
 <meta property="og:description" content="abstract">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/twoForkTree.jpg">
-<meta property="og:updated_time" content="2018-10-23T06:52:30.782Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/2-3NodeTree.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/2-3NodeTree1.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/redBlackTree.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/redBlackTree1.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Red-Black-Tree/redBlackTree2.png">
+<meta property="og:updated_time" content="2018-10-23T09:07:09.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Red-Black Tree">
 <meta name="twitter:description" content="abstract">
@@ -310,7 +315,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-23T14:52:30+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-23T17:07:09+08:00">
                 2018-10-23
               </time>
             
@@ -365,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  190
+                  757
                 </span>
               
 
@@ -381,7 +386,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -416,17 +421,56 @@
 <li>分块查找</li>
 <li>哈希查找</li>
 </ol>
-<h3 id="二叉树查找"><a href="#二叉树查找" class="headerlink" title="二叉树查找"></a>二叉树查找</h3><p>算法思想：为了查找的方便和快捷，先把待查的数据生成一棵二叉排序树。</p>
-<p>二叉排序树有几个特性：</p>
+<h3 id="二叉树查找"><a href="#二叉树查找" class="headerlink" title="二叉树查找"></a>二叉树查找</h3><p>算法思想：为了查找的方便和快捷，先把待查找的数据生成一棵二叉排序树，利用排序树进行查找</p>
+<p>二叉排序树有几个性值：</p>
 <ol>
-<li><p>若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</p>
+<li><p>若任意节点的<strong>左子树</strong>不空，则<strong>左子树</strong>上所有结点的值均<strong>小于</strong>它的根结点的值；</p>
 </li>
-<li><p>若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p>
+<li><p>若任意节点的<strong>右子树</strong>不空，则<strong>右子树</strong>上所有结点的值均<strong>大于</strong>它的根结点的值；</p>
 </li>
 <li><p>任意节点的左、右子树也分别为二叉查找树。</p>
 </li>
+<li><p>二叉查找树性质：对二叉查找树进行中序遍历(左根右)，即可得到有序的数列。</p>
+</li>
 </ol>
-<p><img src="/2018/10/23/Red-Black-Tree/twoForkTree.jpg" alt="二叉查找树"> </p>
+<p><img src="/2018/10/23/Red-Black-Tree/twoForkTree.jpg" alt="二叉查找树"></p>
+<p>时间复杂度分析：</p>
+<ol>
+<li>最优的情况是一个我们构建出一个<code>完全二叉树</code>,时间复杂度与二分查找相同,即树的高度，为O(logn)。</li>
+<li>最坏情况是构造出一个<code>单支树</code>,时间复杂度为O(n);</li>
+</ol>
+<p>所以，想享受O(logn)的时间复杂度的代价就是，花大功夫构造出一个便于查找的二叉树树。</p>
+<h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><p><code>2-3节点</code>有下列三种可能：</p>
+<ol>
+<li><p>节点为<code>空节点</code></p>
+</li>
+<li><p>节点为<code>2节点</code>，2节点中有一个key,有两个<code>2-3节点</code>。左子所有key比2节点的key都小，右子所有key比2节点的key都大。</p>
+</li>
+<li><p>节点为<code>3节点</code>，3节点中有两个key,有三个<code>2-3节点</code>，左子所有key比3节点<code>小的key</code>都小，中子所有key都介于3节点两个key之间,右子所有key比3节点<code>大的key</code>都大。</p>
+</li>
+</ol>
+<p><img src="/2018/10/23/Red-Black-Tree/2-3NodeTree.png" alt="2-3查找树Node"></p>
+<p>2-3查找树特性：</p>
+<ol>
+<li>在一个完全平衡的2-3查找树中，根节点到每一个为空节点的距离都相同。</li>
+</ol>
+<p><img src="/2018/10/23/Red-Black-Tree/2-3NodeTree1.png" alt="2-3查找树Tree"></p>
+<p>时间复杂度分析：</p>
+<ol>
+<li>最坏情况是所有节点都是2节点，回归二叉树，而且二叉树最优情况<code>完全二叉树</code>，时间复杂度为O(logn);</li>
+<li>最好情况是所有节点都是3节点，时间复杂度就是O(log3n),约等于O(0.631logn)。</li>
+</ol>
+<h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树是2-3查找树最简单的一种实现。<br>红黑树特性：</p>
+<ol>
+<li>每个节点或者是黑色，或者是红色。根节点是黑色。</li>
+<li>每个叶子节点（为空的）都是黑色。</li>
+<li>红色节点的子节点都是黑色</li>
+<li>一个节点到每个子孙节点（叶子节点），经过的黑色节点数都是相同的。</li>
+</ol>
+<p><img src="/2018/10/23/Red-Black-Tree/redBlackTree.jpg" alt="2-3查找树Tree"></p>
+<p>为什么说红黑树是2-3树的简单实现呢。<br>把每个节点看作是<code>2节点</code>。<br>规定红色节点与左子的链接为红色链接。<br>红色链接连接的两个节点看做是一个<code>3节点</code>,就转化成了2-3查找树</p>
+<p><img src="/2018/10/23/Red-Black-Tree/redBlackTree1.png" alt="2-3查找树Tree"></p>
+<p><img src="/2018/10/23/Red-Black-Tree/redBlackTree2.png" alt="2-3查找树Tree"></p>
 
       
     </div>
@@ -627,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树查找"><span class="nav-number">1.</span> <span class="nav-text">二叉树查找</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树查找"><span class="nav-number">1.</span> <span class="nav-text">二叉树查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3查找树"><span class="nav-number">2.</span> <span class="nav-text">2-3查找树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树"><span class="nav-number">3.</span> <span class="nav-text">红黑树</span></a></li></ol></div>
             
 
           </div>
