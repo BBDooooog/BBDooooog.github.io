@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别  String:字符串常量 StringBuffer:字符串变量 StringBuilder:字符串变量  String与StringBuffer和StringBuilder之间的区别执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder 我们知道String是">
+<meta name="description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BBDog">
 <meta property="og:url" content="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder区别/index.html">
 <meta property="og:site_name" content="BBDog">
-<meta property="og:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别  String:字符串常量 StringBuffer:字符串变量 StringBuilder:字符串变量  String与StringBuffer和StringBuilder之间的区别执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder 我们知道String是">
+<meta property="og:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-16T07:46:28.982Z">
+<meta property="og:updated_time" content="2018-10-23T09:41:12.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BBDog">
-<meta name="twitter:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别  String:字符串常量 StringBuffer:字符串变量 StringBuilder:字符串变量  String与StringBuffer和StringBuilder之间的区别执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder 我们知道String是">
+<meta name="twitter:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
 
 
 
@@ -307,8 +307,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-16T15:46:28+08:00">
-                2018-10-16
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-23T17:41:12+08:00">
+                2018-10-23
               </time>
             
           </span>
@@ -380,12 +380,13 @@
 
       
         <p>整理一下近期学习的String、StringBuffer和StringBuilder之间的区别</p>
-<ul>
+<a id="more"></a>
+<p>执行速度：<code>String</code> &lt; <code>StringBuffer</code> &lt; <code>Stringbuilder</code></p>
+<h2 id="String与StringBuffer和StringBuilder之间的区别"><a href="#String与StringBuffer和StringBuilder之间的区别" class="headerlink" title="String与StringBuffer和StringBuilder之间的区别"></a>String与StringBuffer和StringBuilder之间的区别</h2><ul>
 <li>String:字符串常量</li>
 <li>StringBuffer:字符串变量</li>
 <li>StringBuilder:字符串变量</li>
 </ul>
-<h2 id="String与StringBuffer和StringBuilder之间的区别"><a href="#String与StringBuffer和StringBuilder之间的区别" class="headerlink" title="String与StringBuffer和StringBuilder之间的区别"></a>String与StringBuffer和StringBuilder之间的区别</h2><p>执行速度：<code>String</code> &lt; <code>StringBuffer</code> &lt; <code>Stringbuilder</code></p>
 <p>我们知道String是常量，常量是不可以修改的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">  String str = <span class="string">"123"</span>;</span><br><span class="line">  change(str);</span><br><span class="line">  System.out.println(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">change</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">  System.out.println(s);</span><br><span class="line">  s = s + <span class="string">"abc"</span>;</span><br><span class="line">  system.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*console:</span></span><br><span class="line"><span class="comment">123</span></span><br><span class="line"><span class="comment">123abc</span></span><br><span class="line"><span class="comment">123*/</span></span><br></pre></td></tr></table></figure></p>
 <p>可以看到change方法并没有起到效果。</p>
 <ol>
@@ -432,8 +433,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/红黑树/" rel="prev" title="红黑树">
-                红黑树 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/23/Red-Black-Tree/" rel="prev" title="Red-Black Tree">
+                Red-Black Tree <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -515,7 +516,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
