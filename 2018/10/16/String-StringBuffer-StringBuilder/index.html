@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="String,StringBuffer,StringBuilder," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
+<meta name="description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别 执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder">
+<meta name="keywords" content="String,StringBuffer,StringBuilder">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BBDog">
-<meta property="og:url" content="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder区别/index.html">
+<meta property="og:title" content="String、StringBuffer和StringBuilder">
+<meta property="og:url" content="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder/index.html">
 <meta property="og:site_name" content="BBDog">
-<meta property="og:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
+<meta property="og:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别 执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-23T09:41:12.723Z">
+<meta property="og:updated_time" content="2018-10-23T09:47:33.486Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BBDog">
-<meta name="twitter:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别">
+<meta name="twitter:title" content="String、StringBuffer和StringBuilder">
+<meta name="twitter:description" content="整理一下近期学习的String、StringBuffer和StringBuilder之间的区别 执行速度：String &amp;lt; StringBuffer &amp;lt; Stringbuilder">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder区别/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder/"/>
 
 
 
 
 
-  <title> | BBDog</title>
+  <title>String、StringBuffer和StringBuilder | BBDog</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder区别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/String-StringBuffer-StringBuilder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BigBlackDog">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">String、StringBuffer和StringBuilder</h1>
         
 
         <div class="post-meta">
@@ -291,7 +292,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-16T09:46:27+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-16T14:30:25+08:00">
                 2018-10-16
               </time>
             
@@ -307,12 +308,34 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-23T17:41:12+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-23T17:47:33+08:00">
                 2018-10-23
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/字符串/" itemprop="url" rel="index">
+                    <span itemprop="name">字符串</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -380,8 +403,8 @@
 
       
         <p>整理一下近期学习的String、StringBuffer和StringBuilder之间的区别</p>
-<a id="more"></a>
 <p>执行速度：<code>String</code> &lt; <code>StringBuffer</code> &lt; <code>Stringbuilder</code></p>
+<a id="more"></a>
 <h2 id="String与StringBuffer和StringBuilder之间的区别"><a href="#String与StringBuffer和StringBuilder之间的区别" class="headerlink" title="String与StringBuffer和StringBuilder之间的区别"></a>String与StringBuffer和StringBuilder之间的区别</h2><ul>
 <li>String:字符串常量</li>
 <li>StringBuffer:字符串变量</li>
@@ -413,6 +436,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
+          
+            <a href="/tags/StringBuffer/" rel="tag"><i class="fa fa-tag"></i> StringBuffer</a>
+          
+            <a href="/tags/StringBuilder/" rel="tag"><i class="fa fa-tag"></i> StringBuilder</a>
+          
+        </div>
       
 
       
@@ -527,7 +560,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -538,7 +571,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
