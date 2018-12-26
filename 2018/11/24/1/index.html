@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="abstract">
+<meta name="description" content="${menu.text}    	 	      	 	                         	$(function(){ 		FavorMenusPro.content_width = parseInt($(&quot;#favorOperations&quot;).width()); 		var li_width = 0; 		var div_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FreeMarker">
-<meta property="og:url" content="http://yoursite.com/2018/08/02/FreeMarker/index.html">
+<meta property="og:title" content="BBDog">
+<meta property="og:url" content="http://yoursite.com/2018/11/24/1/index.html">
 <meta property="og:site_name" content="BBDog">
-<meta property="og:description" content="abstract">
+<meta property="og:description" content="${menu.text}    	 	      	 	                         	$(function(){ 		FavorMenusPro.content_width = parseInt($(&quot;#favorOperations&quot;).width()); 		var li_width = 0; 		var div_">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-02T01:07:36.188Z">
+<meta property="og:updated_time" content="2018-11-24T18:19:42.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FreeMarker">
-<meta name="twitter:description" content="abstract">
+<meta name="twitter:title" content="BBDog">
+<meta name="twitter:description" content="${menu.text}    	 	      	 	                         	$(function(){ 		FavorMenusPro.content_width = parseInt($(&quot;#favorOperations&quot;).width()); 		var li_width = 0; 		var div_">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/02/FreeMarker/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/24/1/"/>
 
 
 
 
 
-  <title>FreeMarker | BBDog</title>
+  <title> | BBDog</title>
   
 
 
@@ -296,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/02/FreeMarker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="BigBlackDog">
@@ -313,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FreeMarker</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-02T09:07:36+08:00">
-                2018-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T21:01:23+08:00">
+                2018-11-24
               </time>
             
 
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-08-02T09:07:36+08:00">
-                2018-08-02
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-25T02:19:42+08:00">
+                2018-11-25
               </time>
             
           </span>
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1
+                  2
                 </span>
               
 
@@ -413,8 +413,95 @@
       
 
       
-        <p>abstract</p>
-<a id="more"></a>
+        <#assign cur_index="1/">
+<div class="ListFavorMenu_pre">
+        <ul>
+    <#if favormenus??="">
+	<#list favormenus="" as="" menu="">
+    	<li id="${menu.id}">
+    	<a href="javascript:top.frames[2].location='${contextpath}${menu.url}';void(0);" index="${cur_index}" data-menu="${menu.id!''}" onmouseover="FavorMenusPro.moveFun(this);" target="_blank" rel="noopener">${menu.text}</a>
+   	</li>
+	     <#assign cur_index="cur_index+1/">
+	</#assign></#list>
+	</#if>
+       </ul>
+       <div class="clear"></div>
+   </div>
+  <input id="FavorMenusMaxSize" value="${favorMenusSize!'1'}" type="hidden">
+<script>
+	$(function(){
+		FavorMenusPro.content_width = parseInt($("#favorOperations").width());
+		var li_width = 0;
+		var div_index_array = new Array();
+
+		var IEFlag = document.all ? true : false;
+		var IE_V_6 = false;
+		var IE_V_7 = false;
+		if(IEFlag){
+			IE_V_6 = navigator.appVersion.match(/6./i)=="6." ? true : false;
+			IE_V_7 = navigator.appVersion.match(/7./i)=="7." ? true : false;
+		}
+		//alert(IEFlag+"|"+IE_V_6+"|"+IE_V_7);
+		if(IE_V_6||IE_V_7){
+			for(var i=1;i<=${favorMenusSize};i++){
+				li_width = li_width + parseInt($(".ListFavorMenu_pre a[index="+i+"]").parent().width());
+				if(li_width>=+.content_width){
+					div_index_array.push(i-1);
+					li_width = 0;
+					i--;
+				}
+			}
+		}else{
+			for(var i=1;i<=${favorMenusSize};i++){
+				li_width = li_width + parseInt($(".ListFavorMenu_pre a[index="+i+"]").parent().width());
+				if(li_width>=FavorMenusPro.content_width){
+					div_index_array.push(i);
+					li_width = 0;
+				}
+			}
+		}
+
+
+		if(div_index_array.length<1){
+			$("#favorOperations").append('<div class="ListFavorMenu LeftFavorMenu CurFavorMenu" index="1"><ul class="LeftFavorMenu">')
+			.append('</ul><div class="clear"></div></div>');
+			$(".ListFavorMenu[index='1'] ul:first").html('').html($(".ListFavorMenu_pre ul"));
+			$("#FavorMenusMaxSize").val(1);
+		}else{
+			var div_list_num = 1;
+			for(var div_index = 0;div_index<=div_index_array.length;div_index++){
+				if(div_index==0){
+					$("#favorOperations").append('<div class="ListFavorMenu LeftFavorMenu CurFavorMenu" index="1"><ul class="LeftFavorMenu">')
+						.append('</ul><div class="clear"></div></div>');
+					for(var j = 1;j<=div_index_array[0];j++){
+						$(".ListFavorMenu[index='1'] ul:first").append($(".ListFavorMenu_pre a[index="+j+"]").parent());
+					}
+				}else{
+					if(div_index_array[div_index]<=${favorMenusSize}){
+						$("#favorOperations").append('<div class="ListFavorMenu LeftFavorMenu NormalFavorMenu" index="'+(div_index+1)+'"><ul class="LeftFavorMenu">')
+						.append('</ul><div class="clear"></div></div>');
+						for(var j = div_index_array[div_index-1]+1;j<=div_index_array[div_index];j++){
+							$(".ListFavorMenu[index='"+(div_index+1)+"'] ul:first").append($(".ListFavorMenu_pre a[index="+j+"]").parent());
+						}
+						div_list_num = div_list_num + 1;
+					}
+				}
+			}
+			if(div_index_array[div_index_array.length-1]<${favorMenusSize}){
+				div_list_num = div_list_num + 1;
+				$("#favorOperations").append('<div class="ListFavorMenu LeftFavorMenu NormalFavorMenu" index="'+div_list_num+'"><ul class="LeftFavorMenu">')
+				.append('</ul><div class="clear"></div></div>');
+				for(var j = div_index_array[div_index_array.length-1]+1;j<=${favorMenusSize};j++){
+					$(".ListFavorMenu[index='"+div_list_num+"'] ul:first").append($(".ListFavorMenu_pre a[index="+j+"]").parent());
+				}
+			}
+			$("#FavorMenusMaxSize").val(div_list_num);
+		}
+		FavorMenusPro.prevAndNextButFun();
+		$(".ListFavorMenu_pre").remove();
+	});
+</script>
+</#assign>
       
     </div>
     
@@ -438,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/02/SSM/" rel="next" title="SSM">
-                <i class="fa fa-chevron-left"></i> SSM
+              <a href="/2018/11/23/mybatis-generator/" rel="next" title="mybatis-generator">
+                <i class="fa fa-chevron-left"></i> mybatis-generator
               </a>
             
           </div>
@@ -447,10 +534,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/02/IntelliJ-IDEA/" rel="prev" title="IntelliJ IDEA">
-                IntelliJ IDEA <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
