@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA['=='、equals()和hashCode()]]></title>
+    <url>%2F2019%2F01%2F07%2Fequals%E5%92%8ChashCode%2F</url>
+    <content type="text"><![CDATA[原生equals()底层源码通过==来实现，比较的是两个对象（两个对象的引用地址）。 hashCode()是jdk根据对象的地址或者字符串或者数字算出来的int类型的数值. 两个对象的equals()相等（原生），hashCode()一定相等； 两个对象hashCode()相等，epuals()并不一定相等。 equals() 原生equals()底层源码通过==来实现，比较的是两个对象（两个对象的引用地址）。 重写equals()用来比较两个对象的内容是否相等。 常用覆盖逻辑12345678910111213141516171819202122/** * @desc 覆盖equals方法 */ public boolean equals(Object obj)&#123; if(obj == null)&#123; return false; &#125; //如果是同一个对象返回true，反之返回false if(this == obj)&#123; return true; &#125; //判断是否类型相同 if(this.getClass() != obj.getClass())&#123; return false; &#125; //比较对象属性值是否相等 //例如 Person中有两个属性 name,age Person person = (Person)obj; return name.equals(person.name) &amp;&amp; age==person.age; &#125; hashCode()hashCode是jdk根据对象的地址或者字符串或者数字算出来的int类型的数值.对象的地址或者字符串或者数字就是keys，通过一个函数算出hash. hashCode=F(key); hashCode() 在散列表中才有用，在其它情况下没用。在散列表中hashCode() 的作用是获取对象的散列码，进而确定该对象在散列表中的位置； 两个对象的equals()相等（原生），hashCode()一定相等； 两个对象hashCode()相等，epuals()并不一定相等。 我们应该根据对象的特点，重写hashCode方法，尽量避免（3）提到的哈希冲突情况。 HashSet判定一个对象是否重复： HashSet判定为重复对象。 未重写equals()和hashCode()时: code: 123456789Person p1 = new Person("aaa",1);Person p2 = p1;Person p3 = new Person("bbb",1);Set&lt;Person&gt; PS = Sets.newHashSet();PS.add(p1);PS.add(p2);PS.add(p3);System.out.println(p1.equals(p2));System.out.printf(PS+"====》"+"p1.hashCode(%s)==&gt;p2.hashCode(%s)==&gt;p3.hashCode(%s)",p1.hashCode(),p2.hashCode(),p3.hashCode()); console： 12true[aaa - 1, bbb - 1]====》p1.hashCode(1047503754)==&gt;p2.hashCode(1047503754)==&gt;p3.hashCode(1722023916) 我们知道原生equals()相等时，hashCode一定相等； code: 123456789Person p1 = new Person("aaa",1);Person p2 = new Person("aaa",1);Person p3 = new Person("bbb",1);Set&lt;Person&gt; PS = Sets.newHashSet();PS.add(p1);PS.add(p2);PS.add(p3);System.out.println(p1.equals(p2));System.out.printf(PS+"====》"+"p1.hashCode(%s)==&gt;p2.hashCode(%s)==&gt;p3.hashCode(%s)",p1.hashCode(),p2.hashCode(),p3.hashCode()); console： 12false[bbb - 1, aaa - 1, aaa - 1]====》p1.hashCode(1047503754)==&gt;p2.hashCode(1722023916)==&gt;p3.hashCode(2009787198) 只重写hashCode()时： code: 123456789101112131415161718private static class Person &#123; @Override public int hashCode()&#123; int nameHash = name.toUpperCase().hashCode(); return nameHash ^ age; &#125;&#125;public static void main(String[] args)&#123; Person p1 = new Person("aaa",1); Person p2 = new Person("aaa",1); Person p3 = new Person("bbb",1); Set&lt;Person&gt; PS = Sets.newHashSet(); PS.add(p1); PS.add(p2); PS.add(p3); System.out.println(p1.equals(p2)); System.out.printf(PS+"====》"+"p1.hashCode(%s)==&gt;p2.hashCode(%s)==&gt;p3.hashCode(%s)",p1.hashCode(),p2.hashCode(),p3.hashCode()); &#125; console: 12false[aaa - 1, aaa - 1, bbb - 1]====》p1.hashCode(64544)==&gt;p2.hashCode(64544)==&gt;p3.hashCode(65539) 只重写equals()时： code: 123456789101112131415161718192021222324252627282930313233private static class Person &#123; @Override public boolean equals(Object obj)&#123; if(obj == null)&#123; return false; &#125; //如果是同一个对象返回true，反之返回false if(this == obj)&#123; return true; &#125; //判断是否类型相同 if(this.getClass() != obj.getClass())&#123; return false; &#125; Person person = (Person)obj; return name.equals(person.name) &amp;&amp; age==person.age; &#125;&#125;public static void main(String[] args)&#123; Person p1 = new Person("aaa",1); Person p2 = new Person("aaa",1); Person p3 = new Person("bbb",1); Set&lt;Person&gt; PS = Sets.newHashSet(); PS.add(p1); PS.add(p2); PS.add(p3); System.out.println(p1.equals(p2)); System.out.printf(PS+"====》"+"p1.hashCode(%s)==&gt;p2.hashCode(%s)==&gt;p3.hashCode(%s)",p1.hashCode(),p2.hashCode(),p3.hashCode()); &#125; console: 12true[bbb - 1, aaa - 1, aaa - 1]====》p1.hashCode(1047503754)==&gt;p2.hashCode(1722023916)==&gt;p3.hashCode(2009787198) 同时重写equals()和hashCode()时： code: 1234567891011public static void main(String[] args)&#123; Person p1 = new Person("aaa",1); Person p2 = new Person("aaa",1); Person p3 = new Person("bbb",1); Set&lt;Person&gt; PS = Sets.newHashSet(); PS.add(p1); PS.add(p2); PS.add(p3); System.out.println(p1.equals(p2)); System.out.printf(PS+"====》"+"p1.hashCode(%s)==&gt;p2.hashCode(%s)==&gt;p3.hashCode(%s)",p1.hashCode(),p2.hashCode(),p3.hashCode()); &#125; console: 12true[aaa - 1, bbb - 1]====》p1.hashCode(64544)==&gt;p2.hashCode(64544)==&gt;p3.hashCode(65539) 至此我们推断HashSet的判重逻辑是，hashCode()与equals()同时满足]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>equals</tag>
+        <tag>hashCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JVM学习-内存模型]]></title>
     <url>%2F2019%2F01%2F05%2FJVM%E5%AD%A6%E4%B9%A0-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%2F</url>
     <content type="text"><![CDATA[Xmind Zen 挺好用的 学习了《深入理解Java虚拟机》–周志明之后的一点点个人总结，如有错误还请指正。 文字版如下 运行时内存线程私有虚拟机栈 描述 java方法执行的内存模型 存储局部变量表、操作数栈、动态链接、方法出口等信息 方法开始执行时，创建栈帧 从方法执行到执行完成对应（一个栈帧）入栈出栈的过程 功能 局部变量表 存放该方法调用者所传入的参数，及在该方法的方法体中创建的局部变量。 对象引用(reference类型) 可能是指向对象起始地址的引用指针 也可能是指向一个代表对象的句柄 returnAddress类型 指向一条字节码指令的地址 多线程 生命周期与线程一致 抛出异常 线程请求深度大于虚拟机栈允许最大深度时 StackOverflowError 虚拟机栈可以动态扩展，无法申请到足够内存 OutOfMemoryError 本地方法栈 描述 与虚拟机栈十分相似 只不过针对Native方法服务 功能 多线程 生命周期与线程一致 抛出异常 同虚拟机栈异常 程序计数器 描述 当前线程所执行字节码的行号指示器 功能 字节码解释器改变计数器的值 如果执行的是native方法，则计数器值为空 多线程 每个线程的计数器互不影响，相互独立 jvm多线程的理解 jvm通过轮流分配处理器执行时间，实现多线程 共享区域java堆 描述 虚拟机启动时创建 功能 存放对象的实例 jit编译器与逃逸分析技术的发展，栈上分配、标量替换使这一条不那么绝对 存放数组 为了更好的分配和回收会进行细分、功能不变 新生代和老年代 Eden空间、From Survivor空间、To Survivor空间 线程私有的分配缓冲区 TLAB GC 内存回收的主要区域 抛出异常 堆中没有内存可以完成实力分配并且没法扩展时 OutOfMemoryError 参数 -Xmx -Xms 方法区 主区域 描述 堆的逻辑区域 功能 存储已被虚拟机加载的类信息 类的版本、字段、方法、接口等描述信息 常量池 常量 静态变量 即时编辑器编译后的代码 特点 不需要连续的内存空间 可固定可扩展 可以不实现垃圾回收（垃圾回收在此区相对较少） 参数 有些虚拟机把分代收集扩展到方法区称为永久代 永久代大小 -XX:MaxPermSize 运行时常量池 描述 用于存放编译期生成的各种字面变量和符号引用 功能 还可以保存翻译出来的直接引用 特点 相对于Class文件常量池具备动态性 运行期间也可以讲新的常量放入池中 String.intern() 抛出异常 方法区无法满足内存分配需求时 OutOfMemoryError 直接内存 描述 NIO类可以操作Native函数库直接分配堆外内存 通过存储在堆中的DirectByteBuffer对象作为这块内存引用操作 抛出异常 OutOfMemoryError 参数 主动设置 -XX:maxDirectMemorySize 默认 -Xms 对象对象的创建 类加载 先通过New指令的参数去常量池中定位到一个类的符号引用 编译时并不知道一个类的直接内存地址，只能使用（符号）来标识类的地址 如果没有，执行相应的类加载过程 分配内存空间 类加载完成后所需的大小可以完全确定 将所需的内存区域从Java堆中划分出来 内存分配方式 规整的内存（已用和未用有一个区分界限） 零散的区域 需要一个空闲列表来统计空闲区域 内存分配时并发性问题 描述 正在给A对象分配，指针还没来得及移动，要开始分配B对象，使用了A对象内存区域 解决方案 动作原子性控制 CAS配上失败重试 作用域控制 为每个线程在堆中分配TLAB,每个线程在自己的区域中划分内存 如果原来的缓冲区域用完了，需要新的缓冲区来划分内存，则需要同步锁来保证完整性 启用TLAB -XX:+/-UseTLAB 翻台 将分配的内存区域置零 不包括对象头 如果使用TLAB，这一步在TLAB分配时完成 设置 根据对象头 对象是那个类的实例 如何才能找到类的元数据信息 对象的哈希码 对象的GC分代年龄等 至此一个对象创建完成，但是对于Java程序来讲对象的创建才刚刚开始，接下来执行init方法 对象的内存布局 对象头包含两部分信息 运行时数据、信息 位数固定 如果储存的信息太多时会复用位数空间 类型指针 即指向它类元数据的指针 虚拟机通过这个指针来确定对象是哪个类的实例 真正储存的有效信息 各类型字段（包括父类） 存储顺序 虚拟机分配策略参数 相同宽度的字段总是被分配到一起 父类定义的变量会在子类之前 字段在Java源码中的定义顺序 对齐填充 保证地址空间时8字节的整数倍 对象的访问定位 通过栈上的reference数据来操作对象 指向对象的引用 访问方式 句柄 Java堆中划分出一块句柄池 reference存储句柄地址 句柄包含对象实例数据与类型数据各自的具体信息 直接指针 Java堆对象的布局中就必须考虑如何放置访问类型数据的相关信息 优缺点 直接指针访问速度快，对象移动时需要改变栈中reference 句柄每次访问查一遍句柄池，但是对象移动（垃圾收集时）不需要修改栈中reference]]></content>
@@ -167,11 +180,6 @@
     <content type="text"><![CDATA[abstract]]></content>
   </entry>
   <entry>
-    <title><![CDATA[java]]></title>
-    <url>%2F2018%2F08%2F02%2Fjava%2F</url>
-    <content type="text"><![CDATA[abstract]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[关于如何学习方法的总结]]></title>
     <url>%2F2018%2F08%2F02%2F%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E7%9A%84%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[记一些学习技术的方法，用高效的方法去学习新的东西，花点时间去学习 学习的技巧收益会比“努力学习”更高，就像提升加速度比提升速度走的更远。 给一个时间限度首先需要先初步了解要学习的技术，对需要掌握的点有个初步认识。再根据自己可支配的学习时间估算出一个比较合理的截止时间。 动手敲敲怎么防止不学完就忘好记性不如烂笔头，可以搭建一个自己的博客，将自己的收获写在里面。不在乎有多少人去看，重在在于这个整理的过程。费曼学习法中指出，当你能熟练的把一个东西向别人讲述的时候，你也就学会了这个东西。 不放过细小的部分，只要是写出来的东西都要对他负责，不用整理的很细致，把涉及的源码都剖析一遍。重在整个文章能围绕一条中心线走下去。看起来很有层次性。 当你把写博客成为一种习惯，时间长了看看之前写的博客对自己也是一种收获。]]></content>
@@ -182,6 +190,11 @@
         <tag>学习方法</tag>
         <tag>高效</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[java]]></title>
+    <url>%2F2018%2F08%2F02%2Fjava%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
   </entry>
   <entry>
     <title><![CDATA[English]]></title>
