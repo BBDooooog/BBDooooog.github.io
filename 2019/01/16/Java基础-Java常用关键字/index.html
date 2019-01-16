@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="关键字," />
+  <meta name="keywords" content="关键字,final,static,package,访问控制,public,private,protected,default," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="abstract">
-<meta name="keywords" content="关键字">
+<meta name="keywords" content="关键字,final,static,package,访问控制,public,private,protected,default">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础-Java常用关键字">
 <meta property="og:url" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/index.html">
@@ -91,7 +91,12 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/finalVar.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/finalObj.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/finalChangeObjVar.png">
-<meta property="og:updated_time" content="2019-01-16T07:03:32.370Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/package.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/defaultMethod.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/protectedMethod.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/protectedChildren.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/16/Java基础-Java常用关键字/privateMethod.png">
+<meta property="og:updated_time" content="2019-01-16T12:28:25.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础-Java常用关键字">
 <meta name="twitter:description" content="abstract">
@@ -347,7 +352,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-16T15:03:32+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-16T20:28:25+08:00">
                 2019-01-16
               </time>
             
@@ -402,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,305
+                  1,843
                 </span>
               
 
@@ -418,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  8
                 </span>
               
             </div>
@@ -538,6 +543,89 @@ son constructor
 <p>不难发现即使mian()中并没有语句，但仍然会有输出。就像之前所说，jvm会把所有<strong>不在方法内部的</strong>的静态资源初始化。</p>
 <h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.cnblogs.com/dolphin0520/p/3736238.html" title="博客园-海子-浅析Java中的final关键字" target="_blank" rel="noopener">博客园-海子-浅析Java中的final关键字</a></p>
 <p><a href="https://www.cnblogs.com/xrq730/p/4820296.html" title="博客园-五月的仓颉-谈谈final的作用" target="_blank" rel="noopener">博客园-五月的仓颉-谈谈final的作用</a></p>
+<h2 id="包和访问权限控制关键字"><a href="#包和访问权限控制关键字" class="headerlink" title="包和访问权限控制关键字"></a>包和访问权限控制关键字</h2><h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><ul>
+<li>包是可以理解为命名空间，他能有效解决类重名问题。  </li>
+<li>为了方便组织和管理，多用倒置域名来标识。</li>
+</ul>
+<h3 id="默认访问权限（包访问权限）、public、private和protected"><a href="#默认访问权限（包访问权限）、public、private和protected" class="headerlink" title="默认访问权限（包访问权限）、public、private和protected"></a>默认访问权限（包访问权限）、public、private和protected</h3><p>一个.java文件只能有一个被public修饰的类，并且类名必须与文件名相同。如果没有public关键字，则对类的命名没有要求。</p>
+<h4 id="修饰类-1"><a href="#修饰类-1" class="headerlink" title="修饰类"></a>修饰类</h4><ul>
+<li>默认访问权限（包访问权限）：用来修饰类的话，表示该类只对同一个包中的其他类可见。</li>
+<li>public：用来修饰类的话，表示该类对其他所有的类都可见。</li>
+<li>如果你想实现其他任何人都不能访问该类，可以通过将类的所有构造器都指定为private。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestExcel</span></span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">         System.out.println(<span class="keyword">new</span> People(<span class="string">"BBDog"</span>).getName());</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<pre><code>BBDog
+</code></pre><p>将People的包名改为test1后</p>
+<p><img src="/2019/01/16/Java基础-Java常用关键字/package.png" alt="默认访问权限权限" title="默认访问权限权限"></p>
+<h4 id="修饰方法和变量"><a href="#修饰方法和变量" class="headerlink" title="修饰方法和变量"></a>修饰方法和变量</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">作用域</th>
+<th style="text-align:center">当前类</th>
+<th style="text-align:center">同包下</th>
+<th style="text-align:center">子孙</th>
+<th style="text-align:center">所有类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">默认</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">√</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+<td style="text-align:center">×</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestExcel</span></span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       People people = <span class="keyword">new</span> People(<span class="string">"BBDog"</span>);</span><br><span class="line">       System.out.println(people.getName());</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>变更getName()的权限,每次初始化包名。</p>
+<ul>
+<li><p>public</p>
+<p>  正常输出： BBDog</p>
+</li>
+<li><p>默认</p>
+<p>  同包下正常输出： BBDog</p>
+<p>  <strong>修改People包名为test1</strong></p>
+<p>  <img src="/2019/01/16/Java基础-Java常用关键字/defaultMethod.png" alt="不同包默认权限方法" title="不同包默认权限方法"></p>
+</li>
+<li><p>protected</p>
+<p>  同包下正常输出： BBDog</p>
+<p>  <strong>修改People包名为test1</strong></p>
+<p>  <img src="/2019/01/16/Java基础-Java常用关键字/protectedMethod.png" alt="不同包protected" title="不同包protected"></p>
+<p>  创建Kids类继承People</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.qigou.b2cex.test1.People;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Kids</span> <span class="keyword">extends</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Kids</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  子类拥有权限，但是调用子类仍然不被允许</p>
+<p>  <img src="/2019/01/16/Java基础-Java常用关键字/protectedChildren.png" alt="protectedChildern" title="protectedChildern"></p>
+</li>
+<li><p>private</p>
+<p>  <img src="/2019/01/16/Java基础-Java常用关键字/privateMethod.png" alt="protectedChildern" title="protectedChildern"></p>
+<h3 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料"></a>参考资料</h3></li>
+</ul>
+<p><a href="https://www.cnblogs.com/dolphin0520/p/3734915.html" title="博客园-海子-浅析Java中的final关键字" target="_blank" rel="noopener">博客园-海子-浅析Java中的final关键字</a></p>
 
       
     </div>
@@ -556,6 +644,22 @@ son constructor
         <div class="post-tags">
           
             <a href="/tags/关键字/" rel="tag"><i class="fa fa-tag"></i> 关键字</a>
+          
+            <a href="/tags/final/" rel="tag"><i class="fa fa-tag"></i> final</a>
+          
+            <a href="/tags/static/" rel="tag"><i class="fa fa-tag"></i> static</a>
+          
+            <a href="/tags/package/" rel="tag"><i class="fa fa-tag"></i> package</a>
+          
+            <a href="/tags/访问控制/" rel="tag"><i class="fa fa-tag"></i> 访问控制</a>
+          
+            <a href="/tags/public/" rel="tag"><i class="fa fa-tag"></i> public</a>
+          
+            <a href="/tags/private/" rel="tag"><i class="fa fa-tag"></i> private</a>
+          
+            <a href="/tags/protected/" rel="tag"><i class="fa fa-tag"></i> protected</a>
+          
+            <a href="/tags/default/" rel="tag"><i class="fa fa-tag"></i> default</a>
           
         </div>
       
@@ -679,7 +783,7 @@ son constructor
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -734,7 +838,7 @@ son constructor
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#final"><span class="nav-number">1.</span> <span class="nav-text">final</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰类"><span class="nav-number">1.1.</span> <span class="nav-text">修饰类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰方法"><span class="nav-number">1.2.</span> <span class="nav-text">修饰方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰变量"><span class="nav-number">1.3.</span> <span class="nav-text">修饰变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">1.4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">2.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源（变量-方法-代码块）"><span class="nav-number">2.1.</span> <span class="nav-text">静态资源（变量/方法/代码块）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项-1"><span class="nav-number">2.2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见面试题"><span class="nav-number">2.3.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一"><span class="nav-number">2.3.1.</span> <span class="nav-text">一</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-1"><span class="nav-number">2.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#final"><span class="nav-number">1.</span> <span class="nav-text">final</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰类"><span class="nav-number">1.1.</span> <span class="nav-text">修饰类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰方法"><span class="nav-number">1.2.</span> <span class="nav-text">修饰方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰变量"><span class="nav-number">1.3.</span> <span class="nav-text">修饰变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">1.4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">2.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源（变量-方法-代码块）"><span class="nav-number">2.1.</span> <span class="nav-text">静态资源（变量/方法/代码块）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项-1"><span class="nav-number">2.2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见面试题"><span class="nav-number">2.3.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一"><span class="nav-number">2.3.1.</span> <span class="nav-text">一</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-1"><span class="nav-number">2.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包和访问权限控制关键字"><span class="nav-number">3.</span> <span class="nav-text">包和访问权限控制关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#package"><span class="nav-number">3.1.</span> <span class="nav-text">package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认访问权限（包访问权限）、public、private和protected"><span class="nav-number">3.2.</span> <span class="nav-text">默认访问权限（包访问权限）、public、private和protected</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修饰类-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">修饰类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修饰方法和变量"><span class="nav-number">3.2.2.</span> <span class="nav-text">修饰方法和变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-2"><span class="nav-number">3.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
