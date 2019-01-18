@@ -87,10 +87,16 @@
 <meta property="og:site_name" content="BBDog">
 <meta property="og:description" content="abstract">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-16T07:05:24.138Z">
+<meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/truefirst.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/truesecond.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/falesdream.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/falsesecond.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/logDate.png">
+<meta property="og:updated_time" content="2019-01-18T03:59:16.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log4j">
 <meta name="twitter:description" content="abstract">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/23/框架-Log4j/truefirst.png">
 
 
 
@@ -342,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-16T15:05:24+08:00">
-                2019-01-16
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-18T11:59:16+08:00">
+                2019-01-18
               </time>
             
           </span>
@@ -397,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  527
+                  1,421
                 </span>
               
 
@@ -413,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  6
                 </span>
               
             </div>
@@ -444,19 +450,136 @@
 <li>level 是日志记录的优先级，分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL或者自定义的级别。  </li>
 <li>appenderName指定日志信息输出到哪个地方，可同时指定多个输出目的地。</li>
 </ul>
-<p>例如:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.rootLogger=info,</span> <span class="string">stdout</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="appender"><a href="#appender" class="headerlink" title="appender"></a>appender</h3><p>appender附加器主要定义日志信息输出在什么位置，主要语法为：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.appenderName</span> <span class="string">=</span> <span class="string">classInfo</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.option1</span> <span class="string">=</span> <span class="string">value1</span></span><br><span class="line">　　<span class="string">…</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.optionN</span> <span class="string">=</span> <span class="string">valueN</span></span><br><span class="line"><span class="string">```</span>     </span><br><span class="line"><span class="string">appenderName与rootlogger中的appenderName对应</span>  </span><br><span class="line"></span><br><span class="line"><span class="string">appender有以下几种：</span></span><br><span class="line"></span><br><span class="line"><span class="string">+</span> <span class="string">org.apache.log4j.ConsoleAppender（控制台）</span></span><br><span class="line"><span class="string">+</span> <span class="string">org.apache.log4j.FileAppender（文件）</span></span><br><span class="line"><span class="string">+</span> <span class="string">org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</span></span><br><span class="line"><span class="string">+</span> <span class="string">org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</span></span><br><span class="line"><span class="string">+</span> <span class="string">org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 输出到控制台(org.apache.log4j.ConsoleAppender)</span></span><br><span class="line"></span><br><span class="line"><span class="string">```yml</span></span><br><span class="line"><span class="string">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="string">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="string">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-dd</span> <span class="attr">HH:mm:ss,SSS&#125;</span> <span class="string">%5p</span> <span class="string">%c&#123;1&#125;:%L</span> <span class="bullet">-</span> <span class="string">%m%n</span></span><br></pre></td></tr></table></figure>
-<p>###</p>
-<h3 id="Layout-负责格式化Appender的输出，其语法为"><a href="#Layout-负责格式化Appender的输出，其语法为" class="headerlink" title="Layout 负责格式化Appender的输出，其语法为"></a>Layout 负责格式化Appender的输出，其语法为</h3><p>Layout 负责格式化Appender的输出，其中，Log4j提供的layout有以下几种：</p>
+<p><strong>例如:</strong></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.rootLogger=info,</span> <span class="string">stdout</span></span><br></pre></td></tr></table></figure>
+<p>有两个疑惑：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Level</th>
+<th style="text-align:center">代号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">FATAL</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">ERROR</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">WARN</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">INFO</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">DEBUG</td>
+<td style="text-align:center">7</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>后面<code>Threshold</code>有限制输出范围，如果这里设置了ERROR,<code>Threshold</code>设置INfO,日志会输出WARN,和INFO级别的日志信息吗？</li>
+<li>中间丢失的<code>1</code>、<code>2</code>、<code>5</code>对应什么级别，他们是被弃用了吗？我这里有酒，希望有了解的可以讲出他们的故事；</li>
+</ol>
+<h3 id="appender"><a href="#appender" class="headerlink" title="appender"></a>appender</h3><p>appender附加器主要定义日志信息输出位置，输出格式等。主要语法为：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.appenderName</span> <span class="string">=</span> <span class="string">classInfo</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.option1</span> <span class="string">=</span> <span class="string">value1</span></span><br><span class="line">　　<span class="string">…</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.optionN</span> <span class="string">=</span> <span class="string">valueN</span></span><br><span class="line"><span class="string">```</span>   </span><br><span class="line"></span><br><span class="line"><span class="string">这里的`appenderName`与**rootlogger**中的`appenderName`对应</span>  </span><br><span class="line"></span><br><span class="line"><span class="string">appender的classInfo有如下选项：</span></span><br><span class="line"></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.ConsoleAppender（控制台）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.FileAppender（文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span></span><br><span class="line"></span><br><span class="line"><span class="string">**例如:**</span></span><br><span class="line"></span><br><span class="line"><span class="string">```yml</span></span><br><span class="line"><span class="string">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span></span><br></pre></td></tr></table></figure>
+<h4 id="appender-option–File"><a href="#appender-option–File" class="headerlink" title="appender.option–File"></a>appender.option–File</h4><p>File是日志输出的目的地。</p>
+<p><strong>例如：</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.stdout.File=logs/log.log</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="appender-option–Threshold"><a href="#appender-option–Threshold" class="headerlink" title="appender.option–Threshold"></a>appender.option–Threshold</h4><p>输出等级限制，包含本身及以上。</p>
+<p><strong>例如：</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 输出DEBUG级别以上的日志</span></span><br><span class="line"><span class="string">log4j.appender.stdout.Threshold=DEBUG</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="appender-option–Append"><a href="#appender-option–Append" class="headerlink" title="appender.option–Append"></a>appender.option–Append</h4><p>日志信息的追加方式。<br>true意味着，默认为true<br>fales意味着，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qigou.b2cex.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.b2bex.goods.service.EsOrderIndexManager;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestExcel</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="string">"BBDOG"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"logger----Info"</span>);</span><br><span class="line">        logger.warn(<span class="string">"logger----warn"</span>);</span><br><span class="line">        logger.debug(<span class="string">"logger----debug"</span>);</span><br><span class="line">        logger.error(<span class="string">"logger----error"</span>);</span><br><span class="line">        logger.info(<span class="string">"-----------------------------分割线-----------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用默认配置，配置文件中有如下信息：</p>
+<p><img src="/2018/11/23/框架-Log4j/truefirst.png" alt=""></p>
+<p>再次执行，信息如下；</p>
+<p><img src="/2018/11/23/框架-Log4j/truesecond.png" alt=""></p>
+<p>配置中增加</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.bbdog.Append=fales</span></span><br></pre></td></tr></table></figure>
+<p>再次执行后，本想顺理成章的像其他博文一样展示只有一份信息。但学东西真的这么顺利过吗？</p>
+<p><img src="/2018/11/23/框架-Log4j/falesdream.png" alt=""></p>
+<p>实际上控制台给我报错：</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log4j:WARN Failed to set property [append] to value "fales".</span><br></pre></td></tr></table></figure>
+<p>然后发现呵呵呵呵！<code>false</code>写成了<code>fales</code>.修改后文件中确实只有最新的日志信息了：</p>
+<p><img src="/2018/11/23/框架-Log4j/falsesecond.png" alt=""></p>
+<h4 id="appender-option–Encoding"><a href="#appender-option–Encoding" class="headerlink" title="appender.option–Encoding"></a>appender.option–Encoding</h4><p>日志信息的编码格式；</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 输出DEBUG级别以上的日志</span></span><br><span class="line"><span class="string">log4j.appender.stdout.Encoding=UTF-8</span></span><br></pre></td></tr></table></figure>
+<h4 id="appender-option–DatePattern"><a href="#appender-option–DatePattern" class="headerlink" title="appender.option–DatePattern"></a>appender.option–DatePattern</h4><p>在DailyRollingFileAppender中可以指定monthly(每月)、 weekly(每周)、daily(每天)、half-daily(每半天)、hourly(每小时)和minutely(每分钟)六个日志生成频度，这是通过为 DatePattern选项赋予不同的值来完成的。DatePattern选项的有效值为：</p>
+<ul>
+<li>‘.’yyyy-MM,对应monthly(每月)</li>
+<li>‘.’yyyy-ww,对应weekly(每周)</li>
+<li>‘.’yyyy-MM-dd,对应daily(每天)</li>
+<li>‘.’yyyy-MM-dd-a,对应half-daily(每半天)</li>
+<li>‘.’yyyy-MM-dd-HH,对应hourly(每小时)</li>
+<li>‘.’yyyy-MM-dd-HH-mm,对应minutely(每分钟)</li>
+</ul>
+<p>DatePattern中不用处理的文字要放到单引号(‘)中，如上面的(.)。如果您对此有疑问可以查阅SimpleDateFormat的文档。DailyRollingFileAppender中使用这个类来处理DatePattern。</p>
+<p>DatePattern格式化之后的文本作为文件名字的<strong>后缀</strong>。DailyRollingFileAppender不支持格式化之后的文本作为文件名字的前缀。</p>
+<p>修改系统时间可以看到效果，当天的文件名为bbdog.log,之前的文件名会加上频度日期</p>
+<p><img src="/2018/11/23/框架-Log4j/logDate.png" alt=""></p>
+<h4 id="appender-option–Layout"><a href="#appender-option–Layout" class="headerlink" title="appender.option–Layout"></a>appender.option–Layout</h4><p>Layout 负责格式化Appender的输出。</p>
+<p>Log4j提供的layout有以下几种：</p>
 <ul>
 <li>org.apache.log4j.HTMLLayout（以HTML表格形式布局），</li>
 <li>org.apache.log4j.PatternLayout（可以灵活地指定布局模式），</li>
 <li>org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串）</li>
 <li>org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</li>
 </ul>
-<p>例如：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="string">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-dd</span> <span class="attr">HH:mm:ss,SSS&#125;</span> <span class="string">%5p</span> <span class="string">%c&#123;1&#125;:%L</span> <span class="bullet">-</span> <span class="string">%m%n</span></span><br></pre></td></tr></table></figure></p>
-<p>ConversionPattern中的格式化参数详见Log4j补充</p>
+<p><strong>例如：</strong></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="string">log4j.appender.stdout.layout.ConversionPattern=%d&#123;yyyy-MM-dd</span> <span class="attr">HH:mm:ss,SSS&#125;</span> <span class="string">%5p</span> <span class="string">%c&#123;1&#125;:%L</span> <span class="bullet">-</span> <span class="string">%m%n</span></span><br></pre></td></tr></table></figure>
+<p>其中ConversionPattern有如下解释</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%m</td>
+<td style="text-align:left">输出代码中指定的消息</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:left">输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL</td>
+</tr>
+<tr>
+<td style="text-align:center">%r</td>
+<td style="text-align:left">输出自应用启动到输出该log信息耗费的毫秒数</td>
+</tr>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:left">输出所属的类目，通常就是所在类的全名</td>
+</tr>
+<tr>
+<td style="text-align:center">%t</td>
+<td style="text-align:left">输出产生该日志事件的线程名</td>
+</tr>
+<tr>
+<td style="text-align:center">%n</td>
+<td style="text-align:left">输出一个回车换行符，Windows平台为“\r\n”，Unix平台为“\n”</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:left">输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss , SSS}，输出类似：2002年10月18日  22 ： 10 ： 28 ， 921</td>
+</tr>
+<tr>
+<td style="text-align:center">%l</td>
+<td style="text-align:left">输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java: 10 )</td>
+</tr>
+</tbody>
+</table>
+<p>这里只演示了<code>DailyRollingFileAppender</code>这种方式下的一些参数.  </p>
+<p>其他输出类型会有额外的参数，如<code>RollingFileAppender</code>下会有<code>MaxFileSize</code>和<code>MaxBackupIndex</code>,单个文件大小和备份数量</p>
+<h2 id="食用方法"><a href="#食用方法" class="headerlink" title="食用方法"></a>食用方法</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/gaishishengzhu/articles/1735441.html" title="博客园-盖世圣猪-log4j配置详解(非常详细)" target="_blank" rel="noopener">博客园-盖世圣猪-log4j配置详解(非常详细)</a></p>
+<p><a href="https://blog.csdn.net/qq_35393693/article/details/79237005" title="CSDN-谁动了我的bug-Log4j Append属性指定是否追加内容" target="_blank" rel="noopener">CSDN-谁动了我的bug-Log4j Append属性指定是否追加内容</a></p>
+<p>ConversionPattern中的格式化参数详见<a href="https://bbdooooog.github.io/2018/11/23/%E6%A1%86%E6%9E%B6-Log4j%E8%A1%A5%E5%85%85/" title="Log4j补充" target="_blank" rel="noopener">Log4j补充</a></p>
 
       
     </div>
@@ -582,7 +705,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -659,7 +782,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加依赖"><span class="nav-number">1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">2.</span> <span class="nav-text">编辑配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rootlogger"><span class="nav-number">2.1.</span> <span class="nav-text">rootlogger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#appender"><span class="nav-number">2.2.</span> <span class="nav-text">appender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layout-负责格式化Appender的输出，其语法为"><span class="nav-number">2.3.</span> <span class="nav-text">Layout 负责格式化Appender的输出，其语法为</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加依赖"><span class="nav-number">1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑配置文件"><span class="nav-number">2.</span> <span class="nav-text">编辑配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rootlogger"><span class="nav-number">2.1.</span> <span class="nav-text">rootlogger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#appender"><span class="nav-number">2.2.</span> <span class="nav-text">appender</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–File"><span class="nav-number">2.2.1.</span> <span class="nav-text">appender.option–File</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–Threshold"><span class="nav-number">2.2.2.</span> <span class="nav-text">appender.option–Threshold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–Append"><span class="nav-number">2.2.3.</span> <span class="nav-text">appender.option–Append</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–Encoding"><span class="nav-number">2.2.4.</span> <span class="nav-text">appender.option–Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–DatePattern"><span class="nav-number">2.2.5.</span> <span class="nav-text">appender.option–DatePattern</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appender-option–Layout"><span class="nav-number">2.2.6.</span> <span class="nav-text">appender.option–Layout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#食用方法"><span class="nav-number">3.</span> <span class="nav-text">食用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
