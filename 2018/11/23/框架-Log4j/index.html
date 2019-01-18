@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/falesdream.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/falsesecond.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/23/框架-Log4j/logDate.png">
-<meta property="og:updated_time" content="2019-01-18T05:01:13.666Z">
+<meta property="og:updated_time" content="2019-01-18T05:34:18.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log4j">
 <meta name="twitter:description" content="abstract">
@@ -348,7 +348,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-18T13:01:13+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-18T13:34:18+08:00">
                 2019-01-18
               </time>
             
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,420
+                  1,402
                 </span>
               
 
@@ -488,7 +488,18 @@
 <li>中间丢失的<code>1</code>、<code>2</code>、<code>5</code>对应什么级别，他们是被弃用了吗？我这里有酒，希望有了解的可以讲出他们的故事；</li>
 </ol>
 <h3 id="appender"><a href="#appender" class="headerlink" title="appender"></a>appender</h3><p>appender附加器主要定义日志信息输出位置，输出格式等。主要语法为：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.appenderName</span> <span class="string">=</span> <span class="string">classInfo</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.option1</span> <span class="string">=</span> <span class="string">value1</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.optionN</span> <span class="string">=</span> <span class="string">valueN</span></span><br><span class="line"><span class="string">```</span>   </span><br><span class="line"></span><br><span class="line"><span class="string">这里的`appenderName`与**rootlogger**中的`appenderName`对应</span>  </span><br><span class="line"></span><br><span class="line"><span class="string">appender的classInfo有如下选项：</span></span><br><span class="line"></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.ConsoleAppender（控制台）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.FileAppender（文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</span></span><br><span class="line">  <span class="string">+</span> <span class="string">org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</span></span><br><span class="line"></span><br><span class="line"><span class="string">**例如:**</span></span><br><span class="line"></span><br><span class="line"><span class="string">```yml</span></span><br><span class="line"><span class="string">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.appenderName</span> <span class="string">=</span> <span class="string">classInfo</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.option1</span> <span class="string">=</span> <span class="string">value1</span></span><br><span class="line"><span class="string">log4j.appender.appenderName.optionN</span> <span class="string">=</span> <span class="string">valueN</span></span><br></pre></td></tr></table></figure>
+<p>这里的<code>appenderName</code>与<strong>rootlogger</strong>中的<code>appenderName</code>对应  </p>
+<p>appender的classInfo有如下选项：</p>
+<ul>
+<li>org.apache.log4j.ConsoleAppender（控制台）</li>
+<li>org.apache.log4j.FileAppender（文件）</li>
+<li>org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件）</li>
+<li>org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件）</li>
+<li>org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</li>
+</ul>
+<p><strong>例如:</strong></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span></span><br></pre></td></tr></table></figure>
 <h4 id="appender-option–File"><a href="#appender-option–File" class="headerlink" title="appender.option–File"></a>appender.option–File</h4><p>File是日志输出的目的地。</p>
 <p><strong>例如：</strong><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">log4j.appender.stdout.File=logs/log.log</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="appender-option–Threshold"><a href="#appender-option–Threshold" class="headerlink" title="appender.option–Threshold"></a>appender.option–Threshold</h4><p>输出等级限制，包含本身及以上。</p>
