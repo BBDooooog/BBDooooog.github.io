@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[尝试-尝试实现扫二维码登陆]]></title>
+    <url>%2F2019%2F01%2F24%2F%E5%B0%9D%E8%AF%95-%E5%B0%9D%E8%AF%95%E5%AE%9E%E7%8E%B0%E6%89%AB%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%99%BB%E9%99%86%2F</url>
+    <content type="text"><![CDATA[TODO 方式一生成二维码要想二维码唯一，用于生成二维码的 长地址转短地址123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899import java.util.LinkedList;import java.util.List;import org.apache.http.NameValuePair;import org.apache.http.client.entity.UrlEncodedFormEntity;import org.apache.http.client.methods.CloseableHttpResponse;import org.apache.http.client.methods.HttpPost;import org.apache.http.impl.client.CloseableHttpClient;import org.apache.http.impl.client.HttpClients;import org.apache.http.message.BasicNameValuePair;import org.apache.http.util.EntityUtils;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONArray;import com.alibaba.fastjson.JSONObject;/*** * 短链接转换工具类 * * @author Administrator * */public class ShortUrlHelper &#123; public static CloseableHttpClient httpClient; static &#123; httpClient = HttpClients.createDefault(); &#125; /** * 将长链接转为短链接(调用的新浪的短网址API) * * @param url * 需要转换的长链接url * @return 返回转换后的短链接 */ public static String convertSinaShortUrl(String url) &#123; try &#123; // 调用新浪API HttpPost post = new HttpPost("http://api.t.sina.com.cn/short_url/shorten.json"); List&lt;NameValuePair&gt; params = new LinkedList&lt;NameValuePair&gt;(); // 必要的url长链接参数 params.add(new BasicNameValuePair("url_long", url)); // 必要的新浪key params.add(new BasicNameValuePair("source", "3271760578")); post.setEntity(new UrlEncodedFormEntity(params, "UTF-8")); CloseableHttpResponse response = httpClient.execute(post); // 得到调用新浪API后成功返回的json字符串 // url_short : 短链接地址 type：类型 url_long：原始长链接地址 String json = EntityUtils.toString(response.getEntity(), "utf-8"); JSONArray jsonArray = JSONArray.parseArray(json); JSONObject object = (JSONObject) jsonArray.get(0); return object.getString("url_short"); &#125; catch (Exception e) &#123; e.printStackTrace(); return ""; &#125; &#125; /** * 将长链接转为短链接(调用的百度短网址API) * * @param url * 需要转换的长链接url * @return 返回转换后的短链接 */ public static String convertBaiDuShortUrl(String url) &#123; try &#123; // 调用百度API HttpPost post = new HttpPost("http://www.dwz.cn/create.php"); List&lt;NameValuePair&gt; params = new LinkedList&lt;NameValuePair&gt;(); // 必要的url长链接参数 params.add(new BasicNameValuePair("url", url)); post.setEntity(new UrlEncodedFormEntity(params, "UTF-8")); CloseableHttpResponse response = httpClient.execute(post); // 得到调用百度API后成功返回的json字符串 // tinyurl : 短链接地址 status：0 表示转换成功 非0表示转换失败 longurl：原始长链接地址 err_msg:错误信息 String jsonStr = EntityUtils.toString(response.getEntity(), "utf-8"); JSONObject object = JSON.parseObject(jsonStr); return object.getString("tinyurl"); &#125; catch (Exception e) &#123; e.printStackTrace(); return ""; &#125; &#125; /** * 测试 * @param args */ public static void main(String []args)&#123; String tinyurl = convertBaiDuShortUrl("http://news.sina.com.cn/gov/xlxw/2018-09-05/doc-ihiixyeu3395739.shtml"); System.out.println(tinyurl); &#125;&#125; 轮询判断二维码状态（服务器请求压力） 未扫描 扫描成功 过时刷新 扫码uid绑定用户(额外库)稍后轮询会返回扫描成功 点击登陆方式二生成二维码扫码通知后台进行登陆 推送 未扫码，不推送 扫码成功，用户信息页 点击登陆]]></content>
+      <categories>
+        <category>尝试</category>
+      </categories>
+      <tags>
+        <tag>二维码</tag>
+        <tag>登陆</tag>
+        <tag>短地址</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[规范-特殊注释]]></title>
+    <url>%2F2019%2F01%2F23%2F%E8%A7%84%E8%8C%83-%E7%89%B9%E6%AE%8A%E6%B3%A8%E9%87%8A%2F</url>
+    <content type="text"><![CDATA[1TODO:这里将要放一个华丽又不失内涵的简介 特殊注释 TODO: 标识该处有功能代码待编写，待实现的功能在说明中会简略说明。 FIXME: 标识该处代码需要修正，甚至代码是错误的，不能工作，需要修复，如何修正会在说明中简略说明。 XXX: 标识该处代码虽然实现了功能，但是实现的方法有待商榷，希望将来能改进，要改进的地方会在说明中简略说明。]]></content>
+      <categories>
+        <category>规范</category>
+      </categories>
+      <tags>
+        <tag>TODO</tag>
+        <tag>XXX</tag>
+        <tag>FIXME</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java常用方法-对象List按属性排序]]></title>
+    <url>%2F2019%2F01%2F23%2FJava%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-%E5%AF%B9%E8%B1%A1List%E6%8C%89%E5%B1%9E%E6%80%A7%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[真香~ 对象List按属性排序1234567891011121314151617181920212223242526272829303132333435363738394041class Animal&#123; private String kind; private int quantity; public Animal(String k,int q)&#123; this.kind = k; this.quantity = q; &#125;&#125;public class Main&#123; public static void main(String[] args) &#123; Animal dog = new Animal("狗",10000); Animal cat = new Animal("猫",5000); Animal pig = new Animal("狗",2000); List&lt;Animal&gt; animalList = new ArrayList&lt;Animal&gt;(); animalList.add(dog); animalList.add(cat); animalList.add(pig); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //升序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //降序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); &#125;&#125;]]></content>
+      <categories>
+        <category>Java常用方法</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+        <tag>List</tag>
+        <tag>对象</tag>
+        <tag>属性</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java集合框架-ArrayList]]></title>
     <url>%2F2019%2F01%2F17%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-ArrayList%2F</url>
     <content type="text"><![CDATA[abstract]]></content>
@@ -59,8 +99,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>虚拟机</tag>
         <tag>JVM</tag>
+        <tag>虚拟机</tag>
       </tags>
   </entry>
   <entry>
@@ -92,7 +132,7 @@
   <entry>
     <title><![CDATA[Log4j补充]]></title>
     <url>%2F2018%2F11%2F23%2F%E6%A1%86%E6%9E%B6-Log4j%E8%A1%A5%E5%85%85%2F</url>
-    <content type="text"><![CDATA[Log4j补充 LoggerConfig LevelEvent Level和LoggerConfig Level对照表 Event Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level Event Level TRACE DEBUG INFO WARN ERROR FATAL OFF ALL YES YES YES YES YES YES NO TRACE YES NO NO NO NO NO NO DEBUG YES YES NO NO NO NO NO INFO YES YES YES NO NO NO NO WARN YES YES YES YES NO NO NO ERROR YES YES YES YES YES NO NO FATAL YES YES YES YES YES YES NO OFF NO NO NO NO NO NO NO 感谢大佬翻译了APILog4j输出格式控制–log4j的PatternLayout参数含义以及详细配置 官方API 没把格式化看懂，但是意外发现了一个markdown编辑神器，可以把excel表格转为Markdown表格。详见文章【利器】 参数 说明 例子 %c 列出logger名字空间的全称，如果加上{&lt;层数&gt;}表示列出从最内层算起的指定层数的名字空间 log4j配置文件参数举例 输出显示媒介 假设当前logger名字空间是”a.b.c” %c a.b.c %c{2} b.c %20c （若名字空间长度小于20，则左边用空格填充） %-20c （若名字空间长度小于20，则右边用空格填充） %.30c （若名字空间长度超过30，截去多余字符） %20.30c （若名字空间长度小于20，则左边用空格填充；若名字空间长度超过30，截去多余字符） %-20.30c （若名字空间长度小于20，则右边用空格填充；若名字空间长度超过30，截去多余字符） %C 列出调用logger的类的全名（包含包路径） 假设当前类是”org.apache.xyz.SomeClass” %C org.apache.xyz.SomeClass %C{1} SomeClass %d 显示日志记录时间，{&lt;日期格式&gt;}使用ISO8601定义的日期格式 %d{yyyy/MM/dd HH:mm:ss,SSS} 2005/10/12 22:23:30,117 %d{ABSOLUTE} 22:23:30,117 %d{DATE} 12 Oct 2005 22:23:30,117 %d{ISO8601} 2005-10-12 22:23:30,117 %F 显示调用logger的源文件名 %F MyClass.java %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数 %l MyClass.main(MyClass.java:129) %L 显示调用logger的代码行 %L 129 %m 显示输出消息 %m This is a message for debug. %M 显示调用logger的方法名 %M main %n 当前平台下的换行符 %n Windows平台下表示rn UNIX平台下表示n %p 显示该条日志的优先级 %p INFO %r 显示从程序启动时到记录该条日志时已经经过的毫秒数 %r 1215 %t 输出产生该日志事件的线程名 %t MyClass %x 按NDC（Nested Diagnostic Context，线程堆栈）顺序输出日志 假设某程序调用顺序是MyApp调用com.foo.Bar %c %x - %m%n MyApp - Call com.foo.Bar. com.foo.Bar - Log in Bar MyApp - Return to MyApp. %X 按MDC（Mapped Diagnostic Context，线程映射表）输出日志。通常用于多个客户端连接同一台服务器，方便服务器区分是那个客户端访问留下来的日志。 %X{5} （记录代号为5的客户端的日志） %% 显示一个百分号 %% %]]></content>
+    <content type="text"><![CDATA[Log4j补充 LoggerConfig LevelEvent Level和LoggerConfig Level对照表 Event Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level LoggerConfig Level Event Level TRACE DEBUG INFO WARN ERROR FATAL OFF ALL YES YES YES YES YES YES NO TRACE YES NO NO NO NO NO NO DEBUG YES YES NO NO NO NO NO INFO YES YES YES NO NO NO NO WARN YES YES YES YES NO NO NO ERROR YES YES YES YES YES NO NO FATAL YES YES YES YES YES YES NO OFF NO NO NO NO NO NO NO 感谢大佬翻译了APILog4j输出格式控制–log4j的PatternLayout参数含义以及详细配置 官方API 没把格式化看懂，但是意外发现了一个markdown编辑神器，可以把excel表格转为Markdown表格。详见文章【利器】 参数 说明 例子 %c 列出logger名字空间的全称，如果加上{&lt;层数&gt;}表示列出从最内层算起的指定层数的名字空间 log4j配置文件参数举例 输出显示媒介 假设当前logger名字空间是”a.b.c” %c a.b.c %c{2} b.c %20c （若名字空间长度小于20，则左边用空格填充） %-20c （若名字空间长度小于20，则右边用空格填充） %.30c （若名字空间长度超过30，截去多余字符） %20.30c （若名字空间长度小于20，则左边用空格填充；若名字空间长度超过30，截去多余字符） %-20.30c （若名字空间长度小于20，则右边用空格填充；若名字空间长度超过30，截去多余字符） %C 列出调用logger的类的全名（包含包路径） 假设当前类是”org.apache.xyz.SomeClass” %C org.apache.xyz.SomeClass %C{1} SomeClass %d 显示日志记录时间，{&lt;日期格式&gt;}使用ISO8601定义的日期格式 %d{yyyy/MM/dd HH:mm:ss,SSS} 2005/10/12 22:23:30,117 %d{ABSOLUTE} 22:23:30,117 %d{DATE} 12 Oct 2005 22:23:30,117 %d{ISO8601} 2005-10-12 22:23:30,117 %F 显示调用logger的源文件名 %F MyClass.java %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数 %l MyClass.main(MyClass.java:129) %L 显示调用logger的代码行 %L 129 %m 显示输出消息 %m This is a message for debug. %M 显示调用logger的方法名 %M main %n 当前平台下的换行符 %n Windows平台下表示rn UNIX平台下表示n %p 显示该条日志的优先级 %p INFO %r 显示从程序启动时到记录该条日志时已经经过的毫秒数 %r 1215 %t 输出产生该日志事件的线程名 %t MyClass %x 按NDC（Nested Diagnostic Context，线程堆栈）顺序输出日志 假设某程序调用顺序是MyApp调用com.foo.Bar %c %x - %m%n MyApp - Call com.foo.Bar. com.foo.Bar - Log in BarMyApp - Return to MyApp. %X 按MDC（Mapped Diagnostic Context，线程映射表）输出日志。通常用于多个客户端连接同一台服务器，方便服务器区分是那个客户端访问留下来的日志。 %X{5} （记录代号为5的客户端的日志） %% 显示一个百分号 %% %]]></content>
       <categories>
         <category>框架</category>
       </categories>
