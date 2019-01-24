@@ -27,9 +27,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Java常用方法-对象List按属性排序]]></title>
+    <title><![CDATA[Java常用方法-集合工具类常用方法]]></title>
     <url>%2F2019%2F01%2F23%2FJava%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-%E5%AF%B9%E8%B1%A1List%E6%8C%89%E5%B1%9E%E6%80%A7%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[真香~ 对象List按属性排序1234567891011121314151617181920212223242526272829303132333435363738394041class Animal&#123; private String kind; private int quantity; public Animal(String k,int q)&#123; this.kind = k; this.quantity = q; &#125;&#125;public class Main&#123; public static void main(String[] args) &#123; Animal dog = new Animal("狗",10000); Animal cat = new Animal("猫",5000); Animal pig = new Animal("狗",2000); List&lt;Animal&gt; animalList = new ArrayList&lt;Animal&gt;(); animalList.add(dog); animalList.add(cat); animalList.add(pig); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //升序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //降序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); &#125;&#125;]]></content>
+    <content type="text"><![CDATA[真香~ 对象List按属性排序1234567891011121314151617181920212223242526272829303132333435363738394041class Animal&#123; private String kind; private int quantity; public Animal(String k,int q)&#123; this.kind = k; this.quantity = q; &#125;&#125;public class Main&#123; public static void main(String[] args) &#123; Animal dog = new Animal("狗",10000); Animal cat = new Animal("猫",5000); Animal pig = new Animal("猪",2000); List&lt;Animal&gt; animalList = new ArrayList&lt;Animal&gt;(); animalList.add(dog); animalList.add(cat); animalList.add(pig); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //升序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //降序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); &#125;&#125; List初始化时进行赋值1List&lt;Long&gt; ids = Arrays.asList(98765432109L,12345678901L);]]></content>
       <categories>
         <category>Java常用方法</category>
       </categories>
@@ -38,6 +38,8 @@
         <tag>List</tag>
         <tag>对象</tag>
         <tag>属性</tag>
+        <tag>初始化</tag>
+        <tag>赋值</tag>
       </tags>
   </entry>
   <entry>
@@ -99,8 +101,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>JVM</tag>
         <tag>虚拟机</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
