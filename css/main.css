@@ -1091,7 +1091,7 @@ pre .javascript .function {
 }
 .header {
   Height: 120px;
-  background: #fff url("../images/headerbg.png") !important;
+  background: url("../images/headerbg.png") !important;
 }
 .headband {
   height: 3px;
@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #267e34;
+  background: #7ff;
 }
 .links-of-blogroll {
   font-size: 13px;
