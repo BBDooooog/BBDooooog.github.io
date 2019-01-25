@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java集合框架-TreeSet]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-TreeSet%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Java集合框架-TreeMap]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-TreeMap%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Java集合框架-HashTable]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-HashTable%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Java集合框架-HashSet]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-HashSet%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Java集合框架-HashMap]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-HashMap%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Java集合框架-LinkedList]]></title>
+    <url>%2F2019%2F01%2F24%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-LinkedList%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[尝试-尝试实现扫二维码登陆]]></title>
     <url>%2F2019%2F01%2F24%2F%E5%B0%9D%E8%AF%95-%E5%B0%9D%E8%AF%95%E5%AE%9E%E7%8E%B0%E6%89%AB%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%99%BB%E9%99%86%2F</url>
     <content type="text"><![CDATA[TODO 方式一生成二维码要想二维码唯一，用于生成二维码的 长地址转短地址123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899import java.util.LinkedList;import java.util.List;import org.apache.http.NameValuePair;import org.apache.http.client.entity.UrlEncodedFormEntity;import org.apache.http.client.methods.CloseableHttpResponse;import org.apache.http.client.methods.HttpPost;import org.apache.http.impl.client.CloseableHttpClient;import org.apache.http.impl.client.HttpClients;import org.apache.http.message.BasicNameValuePair;import org.apache.http.util.EntityUtils;import com.alibaba.fastjson.JSON;import com.alibaba.fastjson.JSONArray;import com.alibaba.fastjson.JSONObject;/*** * 短链接转换工具类 * * @author Administrator * */public class ShortUrlHelper &#123; public static CloseableHttpClient httpClient; static &#123; httpClient = HttpClients.createDefault(); &#125; /** * 将长链接转为短链接(调用的新浪的短网址API) * * @param url * 需要转换的长链接url * @return 返回转换后的短链接 */ public static String convertSinaShortUrl(String url) &#123; try &#123; // 调用新浪API HttpPost post = new HttpPost("http://api.t.sina.com.cn/short_url/shorten.json"); List&lt;NameValuePair&gt; params = new LinkedList&lt;NameValuePair&gt;(); // 必要的url长链接参数 params.add(new BasicNameValuePair("url_long", url)); // 必要的新浪key params.add(new BasicNameValuePair("source", "3271760578")); post.setEntity(new UrlEncodedFormEntity(params, "UTF-8")); CloseableHttpResponse response = httpClient.execute(post); // 得到调用新浪API后成功返回的json字符串 // url_short : 短链接地址 type：类型 url_long：原始长链接地址 String json = EntityUtils.toString(response.getEntity(), "utf-8"); JSONArray jsonArray = JSONArray.parseArray(json); JSONObject object = (JSONObject) jsonArray.get(0); return object.getString("url_short"); &#125; catch (Exception e) &#123; e.printStackTrace(); return ""; &#125; &#125; /** * 将长链接转为短链接(调用的百度短网址API) * * @param url * 需要转换的长链接url * @return 返回转换后的短链接 */ public static String convertBaiDuShortUrl(String url) &#123; try &#123; // 调用百度API HttpPost post = new HttpPost("http://www.dwz.cn/create.php"); List&lt;NameValuePair&gt; params = new LinkedList&lt;NameValuePair&gt;(); // 必要的url长链接参数 params.add(new BasicNameValuePair("url", url)); post.setEntity(new UrlEncodedFormEntity(params, "UTF-8")); CloseableHttpResponse response = httpClient.execute(post); // 得到调用百度API后成功返回的json字符串 // tinyurl : 短链接地址 status：0 表示转换成功 非0表示转换失败 longurl：原始长链接地址 err_msg:错误信息 String jsonStr = EntityUtils.toString(response.getEntity(), "utf-8"); JSONObject object = JSON.parseObject(jsonStr); return object.getString("tinyurl"); &#125; catch (Exception e) &#123; e.printStackTrace(); return ""; &#125; &#125; /** * 测试 * @param args */ public static void main(String []args)&#123; String tinyurl = convertBaiDuShortUrl("http://news.sina.com.cn/gov/xlxw/2018-09-05/doc-ihiixyeu3395739.shtml"); System.out.println(tinyurl); &#125;&#125; 轮询判断二维码状态（服务器请求压力） 未扫描 扫描成功 过时刷新 扫码uid绑定用户(额外库)稍后轮询会返回扫描成功 点击登陆方式二生成二维码扫码通知后台进行登陆 推送 未扫码，不推送 扫码成功，用户信息页 点击登陆]]></content>
@@ -28,7 +58,7 @@
   </entry>
   <entry>
     <title><![CDATA[Java常用方法-集合工具类常用方法]]></title>
-    <url>%2F2019%2F01%2F23%2FJava%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-%E5%AF%B9%E8%B1%A1List%E6%8C%89%E5%B1%9E%E6%80%A7%E6%8E%92%E5%BA%8F%2F</url>
+    <url>%2F2019%2F01%2F23%2FJava%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95-%E9%9B%86%E5%90%88%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
     <content type="text"><![CDATA[真香~ 对象List按属性排序1234567891011121314151617181920212223242526272829303132333435363738394041class Animal&#123; private String kind; private int quantity; public Animal(String k,int q)&#123; this.kind = k; this.quantity = q; &#125;&#125;public class Main&#123; public static void main(String[] args) &#123; Animal dog = new Animal("狗",10000); Animal cat = new Animal("猫",5000); Animal pig = new Animal("猪",2000); List&lt;Animal&gt; animalList = new ArrayList&lt;Animal&gt;(); animalList.add(dog); animalList.add(cat); animalList.add(pig); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //升序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); Collections.sort(animalList, new Comparator&lt;TestA&gt;() &#123; @Override public int compare(TestA o1, TestA o2) &#123; //降序 return o1.getAge().compareTo(o2.getAge()); &#125; &#125;); &#125;&#125; List初始化时进行赋值1List&lt;Long&gt; ids = Arrays.asList(98765432109L,12345678901L);]]></content>
       <categories>
         <category>Java常用方法</category>
@@ -45,7 +75,15 @@
   <entry>
     <title><![CDATA[Java集合框架-ArrayList]]></title>
     <url>%2F2019%2F01%2F17%2FJava%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6-ArrayList%2F</url>
-    <content type="text"><![CDATA[abstract]]></content>
+    <content type="text"><![CDATA[abstract 结构本文使用jdk1.8.0_131 继承了 AbstractList 实现了 List Cloneable 实现了Clone(),使自身可以被克隆； Serializable 支持序列化传输； RandomAccess 实现了随机访问 特性 ArrayList是一个动态数组，初始容量是10 增长方式int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1) ArrayList不是线程安全的，因此只在单线程中使用，多线程用Vector. 重要属性和方法12345678910111213141516171819202122/** * Default initial capacity. */private static final int DEFAULT_CAPACITY = 10;transient Object[] elementData; // non-private to simplify nested class accessprivate int size;private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;private void grow(int minCapacity) &#123; // overflow-conscious code int oldCapacity = elementData.length; int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1); if (newCapacity - minCapacity &lt; 0) newCapacity = minCapacity; if (newCapacity - MAX_ARRAY_SIZE &gt; 0) newCapacity = hugeCapacity(minCapacity); // minCapacity is usually close to size, so this is a win: elementData = Arrays.copyOf(elementData, newCapacity); &#125; 容量大小(capacity)和实际大小（size）不是一回事。 构造方法1234567891011121314151617181920212223242526272829//默认构造方法，创建一个默认容量（10）的数组public ArrayList() &#123; this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;&#125;//指定容量的构造方法public ArrayList(int initialCapacity) &#123; if (initialCapacity &gt; 0) &#123; this.elementData = new Object[initialCapacity]; &#125; else if (initialCapacity == 0) &#123; this.elementData = EMPTY_ELEMENTDATA; &#125; else &#123; throw new IllegalArgumentException("Illegal Capacity: "+ initialCapacity); &#125; &#125;//对泛型不是很了解，日后补充，addpublic ArrayList(Collection&lt;? extends E&gt; c) &#123; elementData = c.toArray(); if ((size = elementData.length) != 0) &#123; // c.toArray might (incorrectly) not return Object[] (see 6260652) if (elementData.getClass() != Object[].class) elementData = Arrays.copyOf(elementData, size, Object[].class); &#125; else &#123; // replace with empty array. this.elementData = EMPTY_ELEMENTDATA; &#125; &#125; API使用循环12345678910111213141516171819202122232425262728293031323334353637383940414243import java.util.*;public class TestExcel&#123; public static void main(String[] args) throws Exception &#123; List&lt;Integer&gt; ids = new ArrayList&lt;Integer&gt;(); for (int i = 0 ; i&lt;100; i++) ids.add(i); randomFor(ids); foreach(ids); iterator(ids); &#125; public static void randomFor(List&lt;Integer&gt; ids)&#123; Long start; Long end; start = System.nanoTime(); for (int i=0; i&lt;ids.size(); i++) &#123; ids.get(i); &#125; end = System.nanoTime(); System.out.println("randomFor:"+(end-start)+"ns"); &#125; public static void foreach(List&lt;Integer&gt; ids)&#123; Long start; Long end; start = System.nanoTime(); for (Integer integ:ids) &#123; ; &#125; end = System.nanoTime(); System.out.println("foreach:"+(end-start)+"ns"); &#125; public static void iterator(List&lt;Integer&gt; ids)&#123; Long start; Long end; start = System.nanoTime(); for(Iterator iter = ids.iterator(); iter.hasNext(); ) &#123; iter.next(); &#125; end = System.nanoTime(); System.out.println("iterator:"+(end-start)+"ns"); &#125;&#125; 1. randomFor:72482ns foreach:232867ns iterator:13879ns1. randomFor:70939ns foreach:200482ns iterator:27245ns randomFor:74538nsforeach:223614nsiterator:25703nsnanotime精确程度有待质疑，但大体能够反映出来一个差距。 数量级 100 1000 10000 100000 1000000 10000000 100000000 randomFor 72482ns 208706ns 882118ns 4ms 5ms 4ms 5ms foreach 223614ns 606585ns 1159708ns 5ms 13ms 24ms 219ms iterator 25703ns 249317ns 277076ns 3ms 6ms 6ms 13ms 亿级开始,放数据的时间媛媛大于循环的时间。 算了半天我感觉效率比显而易见，但是又有多少list需要放亿级的数据呢。最大只能放 优化建议Java集合框架清单]]></content>
+      <categories>
+        <category>Java集合框架</category>
+      </categories>
+      <tags>
+        <tag>List</tag>
+        <tag>ArrayList</tag>
+        <tag>add</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Java基础-Java常用关键字]]></title>
