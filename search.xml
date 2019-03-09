@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[maven-使用Nexus搭建私服]]></title>
+    <url>%2F2019%2F03%2F08%2Fmaven-%E4%BD%BF%E7%94%A8Nexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D%2F</url>
+    <content type="text"><![CDATA[abstract 下载官方下载地址 安装选择合适的位置解压压缩包 这就是Nexus的主要安装目录 当然也可以安装成服务 安装失败，归其原因是因为命令行权限不够，应该使用管理员角色启动命令行 配置主要的几个配置文件路径 nexus-3.15.2-01-win64\nexus-3.15.2-01\bin\nexus.vmoptions nexus-3.15.2-01-win64\nexus-3.15.2-01\etc\nexus-default.properties 例如修改nexus-default.properties中的启动端口1application-port=8686 ##启动 浏览器输入你配置的地址查看Nexus首页]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+        <tag>Nexus</tag>
+        <tag>私服</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Mybatis-缓存]]></title>
+    <url>%2F2019%2F03%2F01%2FMybatis-%E7%BC%93%E5%AD%98%2F</url>
+    <content type="text"><![CDATA[abstract 缓存的作用对于变动不频繁的数据，我们通常使用缓存的方式来将数据存起来，从而减少程序对数据库的访问次数，提升查找效率。 Mybatis一级缓存一级缓存是Sqlsession级别的。默认开启。一个Sqlsession对象代表一次数据库会话。一次会话中有可能频繁执行相同查询语句，往往结果短时间内不会变动，对于这种不会变动的数据。Sqlsession会把每次查询的结果放在本地缓存(local cache)，当发现相同查询时，直接从本地缓存中取。减少了对数据库的io和数据库的查询。 Mybatis一级缓存相关接口类SqlSession将它的工作交给了Executor执行器这个角色来完成，负责完成对数据库的各种操作。缓存信息也由Executor执行器维护。 MyBatis将缓存和对缓存相关的操作封装成了Cache接口中。SqlSession、Executor、Cache之间的关系如下列类图所示： BaseExecutor类实现了Executor接口 PerpetualCache类实现了Cache接口 BaseExecutor类的queryFromDatabase等方法可以操纵PerpetualCache类。从而实现了对缓存的操控。 PerpetualCache实现原理其实很简单，其内部就是通过一个简单的HashMap&lt;k,v&gt; 来实现的，没有其他的任何限制。如下是PerpetualCache的实现代码： MyBatis一级缓存工作流程 对于某个查询，根据statementId,params,rowBounds等来构建一个key值，根据这个key值去缓存Cache中取出对应的key值存储的缓存结果； 判断从Cache中根据特定的key值取的数据数据是否为空，即是否命中； 如果命中，则直接将缓存结果返回； 如果没命中： 去数据库中查询数据，得到查询结果； 将key和查询到的结果分别作为key,value对存储到Cache中； 将查询结果返回； 如何判断两次查询是相同的呢结论 判断[statementId + rowBounds + 传递给JDBC的SQL + 传递给JDBC的参数值]组成的CacheKey是否相同。 判断依据 传入的statementId，对于MyBatis而言，你要使用它，必须需要一个statementId，它代表着你将执行什么样的Sql； MyBatis自身提供的分页功能是通过RowBounds来实现的，它通过rowBounds.offset和rowBounds.limit来过滤查询出来的结果集，这种分页功能是基于查询结果的再过滤，而不是进行数据库的物理分页； 由于MyBatis底层还是依赖于JDBC实现的，那么，对于两次完全一模一样的查询，MyBatis要保证对于底层JDBC而言，也是完全一致的查询才行。而对于JDBC而言，两次查询，只要传入给JDBC的SQL语句完全一致，传入的参数也完全一致，就认为是两次查询是完全一致的。 上述的第3个条件正是要求保证传递给JDBC的SQL语句完全一致；第4条则是保证传递给JDBC的参数也完全一致；MyBatis会将上述的SQL中的#{} 转化成？，通过JDBC的PreparedStatement的参数值进行替换，如果参数值相同，则满足自四条Mybatis一级缓存的生命周期生成 随Sqlsession的创建而创建 消亡 SqlSession的close()方法会释放缓存,缓存不可用 SqlSession的clearCache()方法会清空缓存中的内容 SqlSession执行update()、delete()、insert()方法时，会清空缓存中的内容 Mybatis一级缓存注意事项对于数据更新频繁的SQL,应该注意Sqlsession的生存时间，或是再mapper文件中禁用一级缓存 Mybatis一级缓存扩展PerpetualCache类 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081/* * Copyright 2009-2012 The MyBatis Team * * Licensed under the Apache License, Version 2.0 (the "License"); * you may not use this file except in compliance with the License. * You may obtain a copy of the License at * * http://www.apache.org/licenses/LICENSE-2.0 * * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the License for the specific language governing permissions and * limitations under the License. */package org.apache.ibatis.cache.impl;import java.util.HashMap;import java.util.Map;import java.util.concurrent.locks.ReadWriteLock;import java.util.concurrent.locks.ReentrantReadWriteLock;import org.apache.ibatis.cache.Cache;import org.apache.ibatis.cache.CacheException;public class PerpetualCache implements Cache &#123; private String id; private Map&lt;Object, Object&gt; cache = new HashMap&lt;Object, Object&gt;(); private ReadWriteLock readWriteLock = new ReentrantReadWriteLock(); public PerpetualCache(String id) &#123; this.id = id; &#125; public String getId() &#123; return id; &#125; public int getSize() &#123; return cache.size(); &#125; public void putObject(Object key, Object value) &#123; cache.put(key, value); &#125; public Object getObject(Object key) &#123; return cache.get(key); &#125; public Object removeObject(Object key) &#123; return cache.remove(key); &#125; public void clear() &#123; cache.clear(); &#125; public ReadWriteLock getReadWriteLock() &#123; return readWriteLock; &#125; public boolean equals(Object o) &#123; if (getId() == null) throw new CacheException("Cache instances require an ID."); if (this == o) return true; if (!(o instanceof Cache)) return false; Cache otherCache = (Cache) o; return getId().equals(otherCache.getId()); &#125; public int hashCode() &#123; if (getId() == null) throw new CacheException("Cache instances require an ID."); return getId().hashCode(); &#125;&#125; BaseExecutor类的queryFromDatabase方法 1234567891011121314private &lt;E&gt; List&lt;E&gt; queryFromDatabase(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql) throws SQLException &#123; List&lt;E&gt; list; localCache.putObject(key, EXECUTION_PLACEHOLDER); try &#123; list = doQuery(ms, parameter, rowBounds, resultHandler, boundSql); &#125; finally &#123; localCache.removeObject(key); &#125; localCache.putObject(key, list); if (ms.getStatementType() == StatementType.CALLABLE) &#123; localOutputParameterCache.putObject(key, parameter); &#125; return list;&#125; Mybatis二级缓存二级缓存是mapper级别的。]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>Mybatis</tag>
+        <tag>缓存</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据库-多表关联]]></title>
+    <url>%2F2019%2F02%2F20%2F%E6%95%B0%E6%8D%AE%E5%BA%93-%E5%A4%9A%E8%A1%A8%E5%85%B3%E8%81%94%2F</url>
+    <content type="text"><![CDATA[abstract]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Git-常用操作]]></title>
+    <url>%2F2019%2F01%2F28%2FGit-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[abstract 设置用户信息设置用户名、邮箱全局通用用户信息，本机上所有的Git仓库都是使用这个账号。123git config --global user.name "userName"git config --global user.email "userEmail" 也可以针对某个仓库指定用户名和邮箱 仓库相关初始化仓库使用初始化仓库命令可以在一个打算作为仓库的目录中生成一个.git目录，这个目录就是用作版本控制的文件目录。 1git init 将文件从工作区添加到暂存区1git add 文件名 查看文件提交状态1git status 这个命令会比对仓库与暂存区文件差异，并将差异展现出来。 查看差异1git diff 文件名 将会展现Unix中diff差异格式。 将文件从暂存区提交到仓库1git commit -m "更新说明" 1git commit -a -m "更新说明" 加上-a参数会执行 add + commit 命令 查看版本1git log 默认按更新日期从近到远展示三次提交记录。展示信息如下： commit 最近一次版本号 Author: 用户名&lt;邮箱&gt; Date: 日期 更新说明 commit 上上次版本号 Author: 用户名&lt;邮箱&gt; Date: 日期 更新说明 也可以展示简略信息1git log –-pretty=oneline 展示信息如下： 版本号 更新说明 版本号 更新说明 版本号 更新说明 跳转到某一个版本1234567git reset --hard HEAD^``` 跳转到上一次，`HEAD^^`,挑战到上上次。`HEAD^^^`跳转到上上上次。那么问题来了，上一百次怎么复制粘贴最合理？但其实并不需要```bashgit reset --hard HEAD~100 回退之后后悔了怎么办。git log 也看不到版本号了鸭，这个时候操作1git reflog]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JavaIO-字节流]]></title>
     <url>%2F2019%2F01%2F25%2FJavaIO-%E5%AD%97%E8%8A%82%E6%B5%81%2F</url>
     <content type="text"><![CDATA[abstract 1234567891011121314151617import java.io.*;public class TestExcel&#123; public static void main(String[] args) throws Exception &#123; String fileName = "D:" + File.separator + "OutputStream.txt"; File file = new File(fileName); OutputStream out = new FileOutputStream(file);; byte b0[] = "测试输入输出流".getBytes(); //操作字节流，要转换成字节 out.write(b0); out.close(); InputStream in = new FileInputStream(file); byte b1[] = new byte[(int)file.length()]; int i = 0; i = in.read(b1); System.out.println(i); System.out.println(new String(b1, 0, i)); &#125; console 21 测试输入输出流]]></content>
