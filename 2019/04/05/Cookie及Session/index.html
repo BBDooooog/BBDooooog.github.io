@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "c4a32dee"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/dog.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cookie,Session,会话," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用户访问服务器，如果要区分不同用户的操作，行为等,比如在登陆是勾选记住我，下次就可以不需要登陆直接访问。区分不同的用户，现在客户端用到最多的就是Cookies和Session.Cookie和Session同样可以用来存储用户标识，但他们的存储地点，生存周期，等有很大的区别，常将两者连用。这里会把基础的特征详细的讲一下，扩展讲一下他们的安全性。为下一篇的单点登陆做铺垫。">
+<meta name="keywords" content="Cookie,Session,会话">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie及Session">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/Cookie及Session/index.html">
+<meta property="og:site_name" content="BBDog">
+<meta property="og:description" content="用户访问服务器，如果要区分不同用户的操作，行为等,比如在登陆是勾选记住我，下次就可以不需要登陆直接访问。区分不同的用户，现在客户端用到最多的就是Cookies和Session.Cookie和Session同样可以用来存储用户标识，但他们的存储地点，生存周期，等有很大的区别，常将两者连用。这里会把基础的特征详细的讲一下，扩展讲一下他们的安全性。为下一篇的单点登陆做铺垫。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Cookie及Session/cs01.png">
+<meta property="og:updated_time" content="2019-04-08T12:06:08.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cookie及Session">
+<meta name="twitter:description" content="用户访问服务器，如果要区分不同用户的操作，行为等,比如在登陆是勾选记住我，下次就可以不需要登陆直接访问。区分不同的用户，现在客户端用到最多的就是Cookies和Session.Cookie和Session同样可以用来存储用户标识，但他们的存储地点，生存周期，等有很大的区别，常将两者连用。这里会把基础的特征详细的讲一下，扩展讲一下他们的安全性。为下一篇的单点登陆做铺垫。">
+<meta name="twitter:image" content="http://yoursite.com/Cookie及Session/cs01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/Cookie及Session/"/>
+
+
+
+
+
+  <title>Cookie及Session | BBDog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BBDog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/Cookie及Session/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BigBlackDog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BBDog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cookie及Session</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T14:09:05+08:00">
+                2019-04-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            			
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-08T20:06:08+08:00">
+                2019-04-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,358
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+		
+	  
+		  
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用户访问服务器，如果要区分不同用户的操作，行为等,比如在登陆是勾选记住我，下次就可以不需要登陆直接访问。区分不同的用户，现在客户端用到最多的就是Cookies和Session.<br>Cookie和Session同样可以用来存储用户标识，但他们的存储地点，生存周期，等有很大的区别，常将两者连用。<br>这里会把基础的特征详细的讲一下，扩展讲一下他们的安全性。为下一篇的单点登陆做铺垫。</p>
+<a id="more"></a>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>由于HTTP是一种无状态的协议，服务器单从网络连接上无从知道客户身份。怎么办呢？就给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理。</p>
+<p>Cookie是服务器发送给浏览器的特殊信息（需要浏览器支持Cookie），以文本方式存储在本地，一般是存储在<code>[系统盘]:\Documents and Settings[用户名]\Cookies目录</code>.</p>
+<p>当浏览器向服务器发送请求时，会在请求头中携带Cookie信息。服务器接收到请求后对Cookie中的信息进行识别，操作。最后和返回信息一起返回来。</p>
+<p><img src="/Cookie及Session/cs01.png" alt=""></p>
+<h3 id="Cookie的不可跨域性"><a href="#Cookie的不可跨域性" class="headerlink" title="Cookie的不可跨域性"></a>Cookie的不可跨域性</h3><p>每个网站都会颁发自己的Cookie,而每个网站只希望浏览器请求的时候带上的是自己颁发的Cookie.Cookie规范中的不可跨域性就保证了每个网站只能接受自己颁发的Cookies,Google接收不到alibaba的Cookie，Alibaba接收不到baidu的Cookie。</p>
+<h3 id="编码规则"><a href="#编码规则" class="headerlink" title="编码规则"></a>编码规则</h3><p>如果是Unicode的字符，需要指定编码，一般使用UTF-8,如果是二进制数据，应该编码应指定为base64，英文默认使用两字节的ASCII编码</p>
+<h3 id="Cookie的属性"><a href="#Cookie的属性" class="headerlink" title="Cookie的属性"></a>Cookie的属性</h3><ul>
+<li>String name: 该Cookie的名称。Cookie一旦创建，名称便不可更改.</li>
+<li>Object value：该Cookie的值。如果值为Unicode字符，需要为字符编码。如果值为二进制数据，则需要使用BASE64编码。</li>
+<li>int maxAge：该Cookie失效的时间，单位秒。如果为正数，则该Cookie在&gt;maxAge秒之后失效。如果为负数，该Cookie为临时Cookie，关闭浏览器即失效，浏览器也不会以任何形式保存该Cookie。如果为0，表示删除该Cookie。默认为–1。(这里有很多坑)</li>
+<li>boolean secure：该Cookie是否仅被使用安全协议传输。安全协议。安全协议有HTTPS，SSL等，在网络上传输数据之前先将数据加密。默认为false。</li>
+<li>String path：该Cookie的使用路径。如果设置为“/sessionWeb/”，则只有contextPath为“/sessionWeb”的程序可以访问该Cookie。如果设置为“/”，则本域名下contextPath都可以访问该Cookie。注意最后一个字符必须为“/”。</li>
+<li>String domain：可以访问该Cookie的域名。如果设置为“.google.com”，则所有以“google.com”结尾的域名都可以访问该Cookie。注意第一个字符必须为“.”。</li>
+<li>String comment：该Cookie的用处说明。浏览器显示Cookie信息的时候显示该说明。</li>
+<li>int version：该Cookie使用的版本号。0表示遵循Netscape的Cookie规范，1表示遵循W3C的RFC 2109规范。</li>
+</ul>
+<h4 id="Cookie的有效期"><a href="#Cookie的有效期" class="headerlink" title="Cookie的有效期"></a>Cookie的有效期</h4><p>Cookie的maxAge决定着Cookie的有效期，单位为秒（Second）。Cookie中通过getMaxAge()方法与setMaxAge(int maxAge)方法来读写maxAge属性。</p>
+<ol>
+<li><p>如果为正数，则表示该Cookie会在maxAge秒之后自动失效,并会进行持久化，关闭浏览器仍在有效期内。还可以这样设置为永久有效。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"username"</span>,<span class="string">"bbdogUser1"</span>); <span class="comment">// 新建Cookie</span></span><br><span class="line">cookie.setMaxAge(Integer.MAX_VALUE); <span class="comment">// 设置生命周期为MAX_VALUE</span></span><br><span class="line">response.addCookie(cookie); <span class="comment">// 输出到客户端</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果maxAge为负数，则表示该Cookie仅在本浏览器窗口以及本窗口打开的子窗口内有效，关闭窗口后该Cookie即失效。maxAge为负数的Cookie，为临时性Cookie，不会被持久化，不会被写到Cookie文件中。Cookie信息保存在浏览器内存中，因此关闭浏览器该Cookie就消失了。Cookie默认的maxAge值为–1。</p>
+</li>
+<li><p>如果maxAge为0，则表示删除该Cookie。Cookie机制没有提供删除Cookie的方法，因此通过设置该Cookie即时失效实现删除Cookie的效果。失效的Cookie会被浏览器从Cookie文件或者内存中删除：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"username"</span>,<span class="string">"bbdogUser1"</span>); <span class="comment">// 新建Cookie</span></span><br><span class="line">cookie.setMaxAge(<span class="number">0</span>); <span class="comment">// 设置生命周期为0，不能为负数</span></span><br><span class="line">response.addCookie(cookie); <span class="comment">// 必须执行这一句</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意：从客户端读取Cookie时，包括maxAge在内的其他属性都是不可读的，也不会被提交。浏览器提交Cookie时只会提交name与value属性。maxAge属性只被浏览器用来判断Cookie是否过期。</p>
+<h4 id="Cookie的添加和删除"><a href="#Cookie的添加和删除" class="headerlink" title="Cookie的添加和删除"></a>Cookie的添加和删除</h4><p>Cookie并不提供修改、删除操作。如果要修改某个Cookie，只需要新建一个同名的Cookie，添加到response中覆盖原来的Cookie。如果要删除某个Cookie，只需要新建一个同名的Cookie，并将maxAge设置为0，并添加到response中覆盖原来的Cookie。注意是0而不是负数。负数代表其他的意义。读者可以通过上例的程序进行验证，设置不同的属性。</p>
+<p>注意：修改、删除Cookie时，新建的Cookie除value、maxAge之外的所有属性，例如name、path、domain等，都要与原Cookie完全一样。否则，浏览器将视为两个不同的Cookie不予覆盖，导致修改、删除失败。</p>
+<h4 id="Cookie的域名"><a href="#Cookie的域名" class="headerlink" title="Cookie的域名"></a>Cookie的域名</h4><p><code>Cookie是不可跨域名的</code>。域名<a href="http://www.google.com颁发的Cookie不会被提交到域名www.baidu.com去。这是由Cookie的隐私安全机制决定的。隐私安全机制能够禁止网站非法获取其他网站的Cookie。" target="_blank" rel="noopener">www.google.com颁发的Cookie不会被提交到域名www.baidu.com去。这是由Cookie的隐私安全机制决定的。隐私安全机制能够禁止网站非法获取其他网站的Cookie。</a></p>
+<p>正常情况下，同一个一级域名下的两个二级域名如<a href="http://www.bbdog.com和images.bbdog.com也不能交互使用Cookie，因为二者的域名并不严格相同。如果想所有bbdog.com名下的二级域名都可以使用该Cookie，需要设置Cookie的domain参数，例如：" target="_blank" rel="noopener">www.bbdog.com和images.bbdog.com也不能交互使用Cookie，因为二者的域名并不严格相同。如果想所有bbdog.com名下的二级域名都可以使用该Cookie，需要设置Cookie的domain参数，例如：</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"time"</span>,<span class="string">"20000000"</span>); <span class="comment">// 新建Cookie</span></span><br><span class="line">cookie.setDomain(<span class="string">".bbdog.com"</span>); <span class="comment">// 设置域名</span></span><br><span class="line">cookie.setPath(<span class="string">"/"</span>); <span class="comment">// 设置路径</span></span><br><span class="line">cookie.setMaxAge(Integer.MAX_VALUE); <span class="comment">// 设置有效期</span></span><br><span class="line">response.addCookie(cookie); <span class="comment">// 输出到客户端</span></span><br></pre></td></tr></table></figure></p>
+<p>读者可以修改本机<code>C:\WINDOWS\system32\drivers\etc</code>下的hosts文件来配置多个临时域名，然后使用setCookie.jsp程序来设置跨域名Cookie验证domain属性。</p>
+<p>注意：domain参数必须以点(“.”)开始。另外，name相同但domain不同的两个Cookie是两个不同的Cookie。如果想要两个域名完全不同的网站共有Cookie，可以生成两个Cookie，domain属性分别为两个域名，输出到客户端。</p>
+<h4 id="Cookie的路径"><a href="#Cookie的路径" class="headerlink" title="Cookie的路径"></a>Cookie的路径</h4><p>Cookie的路径是值浏览器访问服务器资源的路径.</p>
+<p>那么Cookie的path是干什么的呢？假设你的浏览器当前已经有了两个Cookie：</p>
+<ol>
+<li>Cookie1：name=id; value=itcast; path=/day07_03/；</li>
+<li>Cookie2：name=name; value=qdmmy6; path=/day07_03/servlet/。</li>
+</ol>
+<p>当访问<a href="http://localhost/day07_03/时，请求头中会包含c1，而不会包含c2。" target="_blank" rel="noopener">http://localhost/day07_03/时，请求头中会包含c1，而不会包含c2。</a></p>
+<p>当访问<a href="http://localhost/day07_03/servlet/时，请求头中会包含c1和c2。" target="_blank" rel="noopener">http://localhost/day07_03/servlet/时，请求头中会包含c1和c2。</a></p>
+<p>注意： 如果服务器相应的时候没有特意设置路径，则会默认返回。例如在请求<a href="http://localhost/day07_03/AServlet时，服务器响应了一个Cookie，那么这个Cookie的默认路径就是/day07_03/。" target="_blank" rel="noopener">http://localhost/day07_03/AServlet时，服务器响应了一个Cookie，那么这个Cookie的默认路径就是/day07_03/。</a></p>
+<h4 id="Cookie的安全性"><a href="#Cookie的安全性" class="headerlink" title="Cookie的安全性"></a>Cookie的安全性</h4><p>HTTP协议不仅是无状态的，而且是不安全的。使用HTTP协议的数据不经过任何加密就直接在网络上传播，有被截获的可能。使用HTTP协议传输很机密的内容是一种隐患。如果不希望Cookie在HTTP等非安全协议中传输，可以设置Cookie的secure属性为true。浏览器只会在HTTPS和SSL等安全协议中传输此类Cookie。下面的代码设置secure属性为true：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"time"</span>, <span class="string">"20000000"</span>); <span class="comment">// 新建Cookie</span></span><br><span class="line">cookie.setSecure(<span class="keyword">true</span>); <span class="comment">// 设置安全属性</span></span><br><span class="line">response.addCookie(cookie); <span class="comment">// 输出到客户端</span></span><br></pre></td></tr></table></figure>
+<p>提示：secure属性并不能对Cookie内容加密，因而不能保证绝对的安全性。如果需要高安全性，需要在程序中对Cookie内容加密、解密，以防泄密。</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>Session可以理解为会话的意思，会话可以理解为客户端与服务器的信息交流.<br>Cookie是将客户信息储存在客户端本地，而Session则是将客户信息存储在服务器。通过Cookie识别了用户身份，再通过Cookie中记录的SessionId来获取用户的身份明细。<br>Session保存在服务器端，因为使用频繁，早期常将直接保存在内存中，但用户量过大时，存储压力增大，还有可能造成内存溢出。现在常将其保存在高读写的数据库中，如redis，并根据实际情况进行分布式处理。</p>
+<h3 id="Session生命周期"><a href="#Session生命周期" class="headerlink" title="Session生命周期"></a>Session生命周期</h3><p>Session在用户第一次访问服务器的时候自动创建。需要注意只有访问JSP、Servlet等程序时才会创建Session，只访问HTML、IMAGE等静态资源并不会创建Session。如果尚未生成Session，也可以使用request.getSession(true)强制生成Session。</p>
+<p>Session生成后，只要用户继续访问，服务器就会更新Session的最后访问时间，并维护该Session。用户每访问服务器一次，无论是否读写Session，服务器都认为该用户的Session“活跃（active）”了一次。</p>
+<h3 id="Session的有效期"><a href="#Session的有效期" class="headerlink" title="Session的有效期"></a>Session的有效期</h3><p>由于会有越来越多的用户访问服务器，因此Session也会越来越多。为防止内存溢出，服务器会把长时间内没有活跃的Session从内存删除。这个时间就是Session的超时时间。如果超过了超时时间没访问过服务器，Session就自动失效了。</p>
+<p>Session的超时时间为maxInactiveInterval属性，可以通过对应的getMaxInactiveInterval()获取，通过setMaxInactiveInterval(longinterval)修改。</p>
+<p>Session的超时时间也可以在web.xml中修改。另外，通过调用Session的invalidate()方法可以使Session失效。</p>
+<h3 id="Session的常用方法"><a href="#Session的常用方法" class="headerlink" title="Session的常用方法"></a>Session的常用方法</h3><p>Session中包括各种方法，使用起来要比Cookie方便得多。Session的常用方法如下所示。</p>
+<ul>
+<li>void setAttribute(String attribute, Object value)：设置Session属性。value参数可以为任何Java Object。通常为Java Bean。value信息不宜过大</li>
+<li>String getAttribute(String attribute)：返回Session属性</li>
+<li>Enumeration getAttributeNames()：返回Session中存在的属性名</li>
+<li>void removeAttribute(String attribute)：移除Session属性</li>
+<li>String getId()：返回Session的ID。该ID由服务器自动创建，不会重复</li>
+<li>long getCreationTime()：返回Session的创建日期。返回类型为long，常被转化为Date类型，例如：Date createTime = new Date(session.get &gt;CreationTime())</li>
+<li>long getLastAccessedTime()：返回Session的最后活跃时间。返回类型为long</li>
+<li>int getMaxInactiveInterval()：返回Session的超时时间。单位为秒。超过该时间没有访问，服务器认为该Session失效</li>
+<li>void setMaxInactiveInterval(int second)：设置Session的超时时间。单位为秒。</li>
+<li>void putValue(String attribute, Object value)：不推荐的方法。已经被setAttribute(String attribute, Object Value)替代</li>
+<li>Object getValue(String attribute)：不被推荐的方法。已经被getAttribute(String attr)替代</li>
+<li>boolean isNew()：返回该Session是否是新创建的</li>
+<li>void invalidate()：使该Session失效</li>
+</ul>
+<h3 id="Session生存时间设置"><a href="#Session生存时间设置" class="headerlink" title="Session生存时间设置"></a>Session生存时间设置</h3><p>Tomcat中设置的默认时间时20分钟，可以在web.xml中修改。单位为<code>分钟</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>60<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span>      <span class="comment">&lt;!-- 单位：分钟 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>也可以通过setMaxInactiveInterval(int seconds)方法修改。单位为<code>秒</code></p>
+<h3 id="session对浏览器的支持"><a href="#session对浏览器的支持" class="headerlink" title="session对浏览器的支持"></a>session对浏览器的支持</h3><h4 id="支持cookie"><a href="#支持cookie" class="headerlink" title="支持cookie"></a>支持cookie</h4><p>因为sessionId记在cookie中，所以使用的时候相对简单。但是需要注意的是，新打开tab页签的时候，共用的当前浏览器窗口的session。但是新打开浏览器窗口的时候，就会新建session.</p>
+<h4 id="不支持Cookie"><a href="#不支持Cookie" class="headerlink" title="不支持Cookie"></a>不支持Cookie</h4><p>如果浏览器不支持cookie,就要使用其他方法来解决。常见的方法有URL重写，和页面重定向。<br>HttpServletResponse类提供了encodeURL(Stringurl)实现URL地址重写。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=response.encodeURL("</span><span class="attr">index.jsp</span>?<span class="attr">c</span>=<span class="string">1&amp;wd</span>=<span class="string">Java</span>") %&gt;</span>"&gt;Homepage<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>该方法会自动判断客户端是否支持Cookie。如果客户端支持Cookie，会将URL原封不动地输出来。如果客户端不支持Cookie，则会将用户Session的id重写到URL中。重写后的输出可能是这样的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"index.jsp;jsessionid=0CCD096E7F8D97B0BE608AFDC3E1931E?c=1&amp;wd=Java"</span>&gt;</span>Homepage<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>即在文件名的后面，在URL参数的前面添加了字符串“;jsessionid=XXX”。其中XXX为Session的id。分析一下可以知道，增添的jsessionid字符串既不会影响请求的文件名，也不会影响提交的地址栏参数。用户单击这个链接的时候会把Session的id通过URL提交到服务器上，服务器通过解析URL地址获得Session的id。<br>页面重定向可通过如下实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(“administrator”.equals(userName)) &#123;</span><br><span class="line">    response.sendRedirect(response.encodeRedirectURL(“administrator.jsp”));</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>与encodeURL方法类似，他也会先进行cookie支持检测。</p>
+<p>注意：TOMCAT判断客户端浏览器是否支持Cookie的依据是请求中是否含有Cookie。尽管客户端可能会支持Cookie，但是由于第一次请求时不会携带任何Cookie（因为并无任何Cookie可以携带），URL地址重写后的地址中仍然会带有jsessionid。当第二次访问时服务器已经在浏览器中写入Cookie了，因此URL地址重写后的地址中就不会带有jsessionid了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cookie/" rel="tag"><i class="fa fa-tag"></i> Cookie</a>
+          
+            <a href="/tags/Session/" rel="tag"><i class="fa fa-tag"></i> Session</a>
+          
+            <a href="/tags/会话/" rel="tag"><i class="fa fa-tag"></i> 会话</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/maven-使用Nexus搭建私服/" rel="next" title="maven-使用Nexus搭建私服">
+                <i class="fa fa-chevron-left"></i> maven-使用Nexus搭建私服
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/dog.ico"
+                alt="BigBlackDog" />
+            
+              <p class="site-author-name" itemprop="name">BigBlackDog</p>
+              <p class="site-description motion-element" itemprop="description">吾尝终日而思矣 不如须臾之所学也</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/BBDooooog" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bbdogggggg@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3655739633/" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">1.</span> <span class="nav-text">Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的不可跨域性"><span class="nav-number">1.1.</span> <span class="nav-text">Cookie的不可跨域性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码规则"><span class="nav-number">1.2.</span> <span class="nav-text">编码规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的属性"><span class="nav-number">1.3.</span> <span class="nav-text">Cookie的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的有效期"><span class="nav-number">1.3.1.</span> <span class="nav-text">Cookie的有效期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的添加和删除"><span class="nav-number">1.3.2.</span> <span class="nav-text">Cookie的添加和删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的域名"><span class="nav-number">1.3.3.</span> <span class="nav-text">Cookie的域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的路径"><span class="nav-number">1.3.4.</span> <span class="nav-text">Cookie的路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的安全性"><span class="nav-number">1.3.5.</span> <span class="nav-text">Cookie的安全性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">2.</span> <span class="nav-text">Session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session生命周期"><span class="nav-number">2.1.</span> <span class="nav-text">Session生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的有效期"><span class="nav-number">2.2.</span> <span class="nav-text">Session的有效期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session的常用方法"><span class="nav-number">2.3.</span> <span class="nav-text">Session的常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session生存时间设置"><span class="nav-number">2.4.</span> <span class="nav-text">Session生存时间设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session对浏览器的支持"><span class="nav-number">2.5.</span> <span class="nav-text">session对浏览器的支持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#支持cookie"><span class="nav-number">2.5.1.</span> <span class="nav-text">支持cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不支持Cookie"><span class="nav-number">2.5.2.</span> <span class="nav-text">不支持Cookie</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BigBlackDog</span>
+
+   
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
