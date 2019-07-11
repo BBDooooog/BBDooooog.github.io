@@ -99,7 +99,7 @@
 <meta name="description" content="吾尝终日而思矣 不如须臾之所学也">
 <meta property="og:type" content="website">
 <meta property="og:title" content="BBDog">
-<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/Java/index.html">
 <meta property="og:site_name" content="BBDog">
 <meta property="og:description" content="吾尝终日而思矣 不如须臾之所学也">
 <meta property="og:locale" content="zh-Hans">
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/java/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/Java/"/>
 
 
 
 
 
-  <title>标签: java | BBDog</title>
+  <title>标签: Java | BBDog</title>
   
 
 
@@ -305,7 +305,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>java<small>标签</small>
+        <h1>Java<small>标签</small>
         </h1>
       </div>
 
@@ -317,37 +317,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/01/07/Java基础-equals和hashCode/" itemprop="url">
+            <a class="post-title-link" href="/2019/07/11/注解-常用注解/" itemprop="url">
               
-                <span itemprop="name">equals()和hashCode()</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-07T12:20:00+08:00"
-              content="2019-01-07" >
-          01-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/05/Java虚拟机-内存模型/" itemprop="url">
-              
-                <span itemprop="name">JVM学习-内存模型</span>
+                <span itemprop="name">注解-常用注解</span>
               
             </a>
         
@@ -355,37 +327,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-05T19:57:09+08:00"
-              content="2019-01-05" >
-          01-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/05/Java虚拟机-学习JVM前的准备/" itemprop="url">
-              
-                <span itemprop="name">学习JVM前的准备</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-05T17:30:11+08:00"
-              content="2019-01-05" >
-          01-05
+              datetime="2019-07-11T15:16:51+08:00"
+              content="2019-07-11" >
+          07-11
         </time>
       </div>
 
@@ -449,7 +393,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +404,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -471,7 +415,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -990,6 +934,76 @@
                 searchResultList += result.item;
               })
               searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
+ searchResultList += "</ul>";
               resultContent.innerHTML = searchResultList;
             }
           }
