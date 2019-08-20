@@ -107,7 +107,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/网络模型.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/协议.gif">
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/报文.png">
-<meta property="og:updated_time" content="2019-07-10T02:59:52.205Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/ip.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/tcp.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/ping.png">
+<meta property="og:updated_time" content="2019-08-20T14:47:41.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络-计算机网络基础">
 <meta name="twitter:description" content="abstract">
@@ -363,8 +366,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-10T10:59:52+08:00">
-                2019-07-10
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T22:47:41+08:00">
+                2019-08-20
               </time>
             
           </span>
@@ -418,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  854
+                  3,330
                 </span>
               
 
@@ -434,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  12
                 </span>
               
             </div>
@@ -460,7 +463,8 @@
         <p>abstract</p>
 <a id="more"></a>
 <h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><p>之前上学时候感觉网络学的挺透彻，毕业一年细节就忘得差不多，只能想起些专有名词。所以从网络上，教材上搜罗些网络基础来加深记忆。</p>
-<h3 id="网络层次划分"><a href="#网络层次划分" class="headerlink" title="网络层次划分"></a>网络层次划分</h3><p>国际标准化组织(ISO)制定了OSI七层网络模型。<br>从下到上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。每一层接受下层服务并为上层提供服务，上三层面向用户。<br>在七层模型基础上又有TCP/IP四、五层模型。</p>
+<h3 id="网络层次划分"><a href="#网络层次划分" class="headerlink" title="网络层次划分"></a>网络层次划分</h3><p>国际标准化组织(ISO)制定了OSI七层网络模型。<br>从下到上分别是：<strong><u>{(物理层)、(数据链路层)、(网络层)、(传输层)、(会话层、表示层、应用层)}</u></strong>  </p>
+<p>每一层接受下层服务并为上层提供服务，上三层面向用户。<br>在七层模型基础上又有TCP/IP四、五层模型。</p>
 <p><img src="/2019/07/08/网络-计算机网络基础/网络模型.jpg" alt="网络模型" title="网络模型"></p>
 <ul>
 <li><p>物理层</p>
@@ -531,7 +535,114 @@
 <p><img src="/2019/07/08/网络-计算机网络基础/协议.gif" alt="协议" title="协议"></p>
 <p>传输内容：</p>
 <p><img src="/2019/07/08/网络-计算机网络基础/报文.png" alt="报文" title="报文"></p>
-<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3>
+<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>IP地址由<strong>网络号</strong>和<strong>主机号</strong>组成。分为A、B、C、D、E五类地址；具体划分如下：</p>
+<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\ip.png" alt=""></p>
+<p>除了这五类地址还有一些特殊地址：</p>
+<ul>
+<li>网络地址：主机号全0表示当前网络</li>
+<li><p>广播地址：主机号全1表示当前网络广播地址（也称直接广播地址）</p>
+</li>
+<li><p>0.0.0.0：</p>
+</li>
+<li><p>255.255.255.255：该IP地址指的是受限的广播地址。受限广播地址与一般广播地址（直接广播地址）的区别在于，受限广播地址只能用于本地网络，路由器不会转发以受限广播地址为目的地址的分组；一般广播地址既可在本地广播，也可跨网段广播。例如：主机192.168.1.1/30上的直接广播数据包后，另外一个网段192.168.1.5/30也能收到该数据报；若发送受限广播数据报，则不能收到。</p>
+<p>注：一般的广播地址（直接广播地址）能够通过某些路由器（当然不是所有的路由器），而受限的广播地址不能通过路由器。</p>
+</li>
+<li><p>回环地址：127.0.0.0/8被用作回环地址，回环地址表示本机的地址，常用于对本机的测试，用的最多的是127.0.0.1。</p>
+</li>
+<li><p>私有地址：</p>
+<ul>
+<li><p>A类私有地址：10.0.0.0/8，范围是：10.0.0.0~10.255.255.255</p>
+</li>
+<li><p>B类私有地址：172.16.0.0/12，范围是：172.16.0.0~172.31.255.255</p>
+</li>
+<li><p>C类私有地址：192.168.0.0/16，范围是：192.168.0.0~192.168.255.255</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><h2 id="IP-ICMP协议"><a href="#IP-ICMP协议" class="headerlink" title="IP/ICMP协议"></a>IP/ICMP协议</h2><h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>IP协议是将多个包交换网络连接起来，它在源地址和目的地址之间传送一种称之为数据包的东西，它还提供对数据大小的重新组装功能，以适应不同网络对包大小的要求。</p>
+<p>IP不提供可靠的传输服务，它不提供端到端的或（路由）结点到（路由）结点的确认，对数据没有差错控制，它只使用报头的校验码，它不提供重发和流量控制。如果出错可以通过<a href="https://baike.baidu.com/item/ICMP/572452" target="_blank" rel="noopener">ICMP</a>报告，ICMP在IP模块中实现。</p>
+<h3 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h3><p>ICMP（Internet Control Message Protocol）Internet控制报文协议。它是<a href="https://baike.baidu.com/item/TCP%2FIP协议簇" target="_blank" rel="noopener">TCP/IP协议簇</a>的一个子协议，用于在IP主机、路由器之间传递<code>控制消息</code>。<strong><u>控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。</u></strong>这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。</p>
+<p>常用形式有两种：查询报文、控制报文。</p>
+<p><strong>查询报文</strong></p>
+<p>​    查询端获取请求，并获取对方相应。如ping命令</p>
+<p>​    <a href="#ping">ping命令</a>相当于在原生ICMP报文中增加时间和序号，根据返回相应的顺序和时间来增加准确性。</p>
+<p><strong>控制报文</strong></p>
+<ol>
+<li><p>源抑制报文</p>
+<p>发送端发送大量数据时，可能会导致网络( 路由器 )过载，此时过载处可以向发送端发送源抑制的消息，让他降低发送速度。</p>
+</li>
+<li><p>终点不可到达<br>网络信息不能到达终点，就会给发送端发送一个目的不可到达的信息。告诉发送端可能是设备故障而引起关闭（情况之一）。然后这种又可以再次细分：<br>A、网络不可达  — 代码为 0，<br>B、主机不可达 — 代码为 1.<br>C、协议不可达 — 代码为 2.<br>D、端口不可达 — 代码为 3.<br>E、需要分段 - 代码为 4.（ 必须把数据分段才能去到终点 ）</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>超时<br>网络包超过设置的在网络中的生存时间，还没有达到。</p>
+</li>
+<li><p>路由重定向<br>定义数据包的路由股则。因为大部分的时候，路由规则是通过相关协议算法生成的，有些时候重新定义过之后，会让这个数据包绕的更远。</p>
+<p>相见本文<a href="#traceroute">traceroute命令</a>（windows系统为tracert命令）</p>
+</li>
+</ol>
+<h2 id="ARP-RARP协议"><a href="#ARP-RARP协议" class="headerlink" title="ARP/RARP协议"></a>ARP/RARP协议</h2><h3 id="ARP协议流程"><a href="#ARP协议流程" class="headerlink" title="ARP协议流程"></a>ARP协议流程</h3><p>地址解析协议，即ARP（Address Resolution Protocol），是<strong>根据IP地址获取物理地址</strong>的一个TCP/IP协议。</p>
+<ol>
+<li>首先，每个主机都会在自己的ARP缓冲区中建立一个ARP列表，以表示IP地址和MAC地址之间的对应关系。</li>
+<li>当源主机要发送数据时，首先检查ARP列表中是否有对应IP地址的目的主机的MAC地址，如果有，则直接发送数据，如果没有，就向本网段的所有主机发送ARP数据包，该数据包包括的内容有：源主机 IP地址，源主机MAC地址，目的主机的IP 地址</li>
+<li>当本网络的所有主机收到该ARP数据包时，首先检查数据包中的IP地址是否是自己的IP地址，如果不是，则忽略该数据包，如果是，则首先从数据包中取出源主机的IP和MAC地址写入到ARP列表中，如果已经存在，则覆盖，然后将自己的MAC地址写入ARP响应包中，告诉源主机自己是它想要找的MAC地址。</li>
+<li>源主机收到ARP响应包后。将目的主机的IP和MAC地址写入ARP列表，并利用此信息发送数据。如果源主机一直没有收到ARP响应数据包，表示ARP查询失败。</li>
+</ol>
+<p><strong>注意：广播（255.255.255.255）发送ARP请求，单播发送ARP响应。</strong></p>
+<h3 id="RARP协议流程"><a href="#RARP协议流程" class="headerlink" title="RARP协议流程"></a>RARP协议流程</h3><p>RARP协议是<strong>根据mac地址获取IP地址</strong>的一个协议</p>
+<ol>
+<li><p>发送端发送一个本地的RARP广播包，在此广播包中声明自己的MAC地址，并且请求任何收到此请求的RARP服务器分配一个IP地址。</p>
+</li>
+<li><p>本地网段上的RARP服务器收到此请求后，检查其RARP列表，查找该MAC地址对应的IP地址。如果存在，RARP服务器就给源主机发送一个响应数据包，并将此IP地址提供给对方主机使用；如果不存在，RARP服务器对此不做任何响应。</p>
+</li>
+<li><p>源端在收到从RARP服务器来的响应信息后，利用得到的IP地址进行通信；如果一直没有收到RARP服务器的响应信息，则表示初始化失败。</p>
+</li>
+</ol>
+<h2 id="路由选择协议"><a href="#路由选择协议" class="headerlink" title="路由选择协议"></a>路由选择协议</h2><p>上学时学到的路由选择协议有RIP协议、OSPF协议</p>
+<ul>
+<li>RIP协议：</li>
+<li>OSPF协议：</li>
+</ul>
+<h2 id="TCP-IP协议"><a href="#TCP-IP协议" class="headerlink" title="TCP/IP协议"></a>TCP/IP协议</h2><p>TCP/IP协议是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。</p>
+<ol>
+<li><p>歪，你在吗（甲方不知道乙方在不在）</p>
+</li>
+<li><p>嗯嗯，我在（乙方知道甲方在找自己，乙方不知道甲方能不能接收到回应）【甲方确认乙方】</p>
+</li>
+<li><p>在那我就开始说了（甲方知道乙方在，并且告诉乙方收到了他的回应）【乙方确认甲方】</p>
+</li>
+</ol>
+<p>双方确认的基础上进行可靠连接。</p>
+<ol>
+<li>我听到一个消息，巴拉</li>
+<li>嗯嗯，你继续说</li>
+<li>巴拉巴拉</li>
+<li>嗯嗯，你继续说</li>
+<li>巴拉巴拉巴拉</li>
+<li></li>
+<li>？？？ 怎么不回了？巴拉巴拉巴拉</li>
+<li></li>
+</ol>
+<p>连接意外断开情况</p>
+<p>为了防止漏掉信息，结束对话更是谨慎</p>
+<ol>
+<li>甲：我没有要说的了（停止发送数据）</li>
+<li>已： 嗯嗯（我收了你不发信息的通知了）【已方知道甲方不发消息了】</li>
+<li>已： 我也没有要说的了（停止发送数据）</li>
+<li>甲： 拜拜【甲方也知道乙方不再发消息了】</li>
+</ol>
+<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\tcp.png" alt=""></p>
+<p>由此可见，TCP协议是建立在双方完全确认的情况下进行的计算机程序之间的<strong>端到端</strong>的连接。</p>
+<h2 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h2><p>ip协议是不可靠的，邮局到邮局的传输，UDP则像是对IP协议的接口话，实现了，邮筒到信箱之间的不可靠传输。</p>
+<h2 id="ping命令"><a href="#ping命令" class="headerlink" title="ping命令"></a><span id="ping" class="ping">ping命令</span></h2><p>TTL : 数据包在网络中生存时间，也就是通过数据被路由器转发的次数，没转发一次就减一。知道为 0 的时候就抛弃。</p>
+<p>windowns系统只会请求4次，linux系统会一直请求。</p>
+<p>因为是基础，暂不研究详细参数。</p>
+<h2 id="traceroute命令"><a href="#traceroute命令" class="headerlink" title="traceroute命令"></a><span id="traceroute">traceroute命令</span></h2><p>traceoute  有点像是在不断试错的意思,windows系统为tracert命令。是用来侦测主机到目的主机之间所经路由情况的重要工具。Ping 我们知道是可以知道这条大路通不通的，traceoute 通过设置  TTL 知道到底是哪个路由器不通。</p>
+<p>traceroute 的原理：它收到目的主机的 IP 后，首先给目的主机发送一个 TTL=1 的 <strong>UDP 数据包</strong>，而经过的第一个路由器收到这个数据包以后，就自动把 TTL 减 1，而 TTL 变为 0 以后，路由器就把这个包给抛弃了，并同时产生 一个主机不可达的 ICMP 数据报给主机。如此循环就可以知道所有的路由 IP 了。（ ICMP 出错了就会回错误包 ）<br>通常 Traceoute 的目的端口设置的是一个大于 30000 的值（ 一般的应用端口号远小于这个数 ）。所以如果回复的是 “端口不可达”，那就说明到达终点，否则这个信息就会超时。以此确保 消息是否到达终点。</p>
+<p>traceoute 还有一个有意思的功能，就是确定 MTU（数据最大传输单元），traceoute  通常对数据不分段，就直接发送，如果如果遇到过程中某个路由转发，出现返回 ICMP 需要分段的错误，就把数据进行拆分，直到最后到达终点。就验证出 MTU。</p>
+<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\ping.png" alt="ping命令与tracert命令" title="ping命令与tracert命令"></p>
+
       
     </div>
     
@@ -656,7 +767,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -667,7 +778,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -678,7 +789,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -727,7 +838,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络基础"><span class="nav-number">1.</span> <span class="nav-text">计算机网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层次划分"><span class="nav-number">1.1.</span> <span class="nav-text">网络层次划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址"><span class="nav-number">1.2.</span> <span class="nav-text">IP地址</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络基础"><span class="nav-number">1.</span> <span class="nav-text">计算机网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层次划分"><span class="nav-number">1.1.</span> <span class="nav-text">网络层次划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址"><span class="nav-number">1.2.</span> <span class="nav-text">IP地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子网划分"><span class="nav-number">2.</span> <span class="nav-text">子网划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-ICMP协议"><span class="nav-number">3.</span> <span class="nav-text">IP/ICMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP协议"><span class="nav-number">3.1.</span> <span class="nav-text">IP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP协议"><span class="nav-number">3.2.</span> <span class="nav-text">ICMP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP-RARP协议"><span class="nav-number">4.</span> <span class="nav-text">ARP/RARP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议流程"><span class="nav-number">4.1.</span> <span class="nav-text">ARP协议流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RARP协议流程"><span class="nav-number">4.2.</span> <span class="nav-text">RARP协议流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由选择协议"><span class="nav-number">5.</span> <span class="nav-text">路由选择协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP协议"><span class="nav-number">6.</span> <span class="nav-text">TCP/IP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP协议"><span class="nav-number">7.</span> <span class="nav-text">UDP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ping命令"><span class="nav-number">8.</span> <span class="nav-text">ping命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#traceroute命令"><span class="nav-number">9.</span> <span class="nav-text">traceroute命令</span></a></li></ol></div>
             
 
           </div>
