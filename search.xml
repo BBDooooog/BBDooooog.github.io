@@ -19,8 +19,8 @@
         <category>JavaIO</category>
       </categories>
       <tags>
-        <tag>IO</tag>
         <tag>java</tag>
+        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
@@ -236,8 +236,8 @@
         <category>Java常用方法</category>
       </categories>
       <tags>
-        <tag>排序</tag>
         <tag>List</tag>
+        <tag>排序</tag>
         <tag>对象</tag>
         <tag>属性</tag>
         <tag>初始化</tag>
