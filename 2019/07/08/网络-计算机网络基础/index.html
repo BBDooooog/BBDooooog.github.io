@@ -107,10 +107,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/网络模型.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/协议.gif">
 <meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/报文.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/ip.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/tcp.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/blog/bbdog/source/_posts/网络-计算机网络基础/ping.png">
-<meta property="og:updated_time" content="2019-08-20T14:47:41.235Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/ip.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/tcp.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/08/网络-计算机网络基础/ping.png">
+<meta property="og:updated_time" content="2019-09-25T12:21:41.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络-计算机网络基础">
 <meta name="twitter:description" content="abstract">
@@ -366,8 +366,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T22:47:41+08:00">
-                2019-08-20
+              <time title="更新于" itemprop="dateModified" datetime="2019-09-25T20:21:41+08:00">
+                2019-09-25
               </time>
             
           </span>
@@ -536,7 +536,7 @@
 <p>传输内容：</p>
 <p><img src="/2019/07/08/网络-计算机网络基础/报文.png" alt="报文" title="报文"></p>
 <h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>IP地址由<strong>网络号</strong>和<strong>主机号</strong>组成。分为A、B、C、D、E五类地址；具体划分如下：</p>
-<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\ip.png" alt=""></p>
+<p><img src="/2019/07/08/网络-计算机网络基础/ip.png" alt=""></p>
 <p>除了这五类地址还有一些特殊地址：</p>
 <ul>
 <li>网络地址：主机号全0表示当前网络</li>
@@ -578,7 +578,7 @@
 <ol start="3">
 <li><p>超时<br>网络包超过设置的在网络中的生存时间，还没有达到。</p>
 </li>
-<li><p>路由重定向<br>定义数据包的路由股则。因为大部分的时候，路由规则是通过相关协议算法生成的，有些时候重新定义过之后，会让这个数据包绕的更远。</p>
+<li><p>路由重定向<br> 定义数据包的路由股则。因为大部分的时候，路由规则是通过相关协议算法生成的，有些时候重新定义过之后，会让这个数据包绕的更远。</p>
 <p>相见本文<a href="#traceroute">traceroute命令</a>（windows系统为tracert命令）</p>
 </li>
 </ol>
@@ -632,7 +632,7 @@
 <li>已： 我也没有要说的了（停止发送数据）</li>
 <li>甲： 拜拜【甲方也知道乙方不再发消息了】</li>
 </ol>
-<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\tcp.png" alt=""></p>
+<p><img src="/2019/07/08/网络-计算机网络基础/tcp.png" alt=""></p>
 <p>由此可见，TCP协议是建立在双方完全确认的情况下进行的计算机程序之间的<strong>端到端</strong>的连接。</p>
 <h2 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h2><p>ip协议是不可靠的，邮局到邮局的传输，UDP则像是对IP协议的接口话，实现了，邮筒到信箱之间的不可靠传输。</p>
 <h2 id="ping命令"><a href="#ping命令" class="headerlink" title="ping命令"></a><span id="ping" class="ping">ping命令</span></h2><p>TTL : 数据包在网络中生存时间，也就是通过数据被路由器转发的次数，没转发一次就减一。知道为 0 的时候就抛弃。</p>
@@ -641,7 +641,7 @@
 <h2 id="traceroute命令"><a href="#traceroute命令" class="headerlink" title="traceroute命令"></a><span id="traceroute">traceroute命令</span></h2><p>traceoute  有点像是在不断试错的意思,windows系统为tracert命令。是用来侦测主机到目的主机之间所经路由情况的重要工具。Ping 我们知道是可以知道这条大路通不通的，traceoute 通过设置  TTL 知道到底是哪个路由器不通。</p>
 <p>traceroute 的原理：它收到目的主机的 IP 后，首先给目的主机发送一个 TTL=1 的 <strong>UDP 数据包</strong>，而经过的第一个路由器收到这个数据包以后，就自动把 TTL 减 1，而 TTL 变为 0 以后，路由器就把这个包给抛弃了，并同时产生 一个主机不可达的 ICMP 数据报给主机。如此循环就可以知道所有的路由 IP 了。（ ICMP 出错了就会回错误包 ）<br>通常 Traceoute 的目的端口设置的是一个大于 30000 的值（ 一般的应用端口号远小于这个数 ）。所以如果回复的是 “端口不可达”，那就说明到达终点，否则这个信息就会超时。以此确保 消息是否到达终点。</p>
 <p>traceoute 还有一个有意思的功能，就是确定 MTU（数据最大传输单元），traceoute  通常对数据不分段，就直接发送，如果如果遇到过程中某个路由转发，出现返回 ICMP 需要分段的错误，就把数据进行拆分，直到最后到达终点。就验证出 MTU。</p>
-<p><img src="/2019/07/08/网络-计算机网络基础/blog\bbdog\source\_posts\网络-计算机网络基础\ping.png" alt="ping命令与tracert命令" title="ping命令与tracert命令"></p>
+<p><img src="/2019/07/08/网络-计算机网络基础/ping.png" alt="ping命令与tracert命令" title="ping命令与tracert命令"></p>
 
       
     </div>
@@ -767,7 +767,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
